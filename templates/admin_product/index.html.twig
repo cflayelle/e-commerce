@@ -1,0 +1,33 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello AdminProductController!{% endblock %}
+
+{% block body %}
+  <div class="pt-5">
+    <table class="table table-hover table-light table-striped">
+      <thead>
+        <tr class="table-dark">
+          <th scope="col">id</th>
+          <th scope="col">Produit</th>
+          <th scope="col">Categories</th>
+          <th scope="col">Quantité</th>
+          <th scope="col">Prix</th>
+          <th scope="col">Options</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for product in products %}
+          <tr class="">
+            <th scope="row">1</th>
+            <th>{{product.name}}</th>
+            <td>Horreur</td>
+            <td>{{product.quantity}}</td>
+            <td>{{product.price}}</td>
+            <td><a href="#" class="btn btn-outline-primary btn-sm">Modifier</a></td>
+          </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+
+  </div>
+{% endblock %}
