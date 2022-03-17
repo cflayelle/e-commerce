@@ -3,7 +3,8 @@
 {% block title %}Hello AdminProductController!{% endblock %}
 
 {% block body %}
-  <div class="pt-5">
+  <div class="pt-5 d-flex flex-column">
+    <a href=" {{path('admin_product_new')}} " class="btn btn-outline-light btn-md mb-4 align-self-end">Ajouter un produit</a>
     <table class="table table-hover table-light table-striped">
       <thead>
         <tr class="table-dark">
@@ -18,7 +19,7 @@
       <tbody>
         {% for product in products %}
           <tr class="">
-            <th scope="row">1</th>
+            <th scope="row">{{product.id}}</th>
             <th>{{product.name}}</th>
             <td>Horreur</td>
             <td>{{product.quantity}}</td>
