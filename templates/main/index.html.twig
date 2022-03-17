@@ -1,18 +1,13 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Hello MainController!{% endblock %}
+{% block title %}BookShop{% endblock %}
 
 {% block body %}
-<style>
-    .example-wrapper { margin: 1em auto; max-width: 800px; width: 95%; font: 18px/1.5 sans-serif; }
-    .example-wrapper code { background: #F5F5F5; padding: 2px 6px; }
-</style>
 
-<div class="example-wrapper">
-    <h1>Hello {{ controller_name }}! ✅</h1>
-
-    <button class="btn btn-primary">test</button>
-    
-
+<div style="height: 100vh;">
+    <div class="bg-primary d-flex flex-column gap-5 justify-content-center align-items-center" style="height: 90%;">
+        <h1 class="text-white">Bienvenue</h1>
+        <a href="{{ path( 'product') }}" class="btn btn-primary">Voir tous les livres</a>
+    </div>
 </div>
 {% endblock %}
