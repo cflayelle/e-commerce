@@ -1,0 +1,28 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello AdminCategoryController!{% endblock %}
+
+{% block body %}
+<div class="pt-5 d-flex flex-column">
+    <a href="#" class="btn btn-outline-light btn-md mb-4 align-self-end">Ajouter une catégorie</a>
+    <table class="table table-hover table-light table-striped">
+      <thead>
+        <tr class="table-dark">
+          <th scope="col">id</th>
+          <th scope="col">Categorie</th>
+          <th scope="col">Options</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for category in categories %}
+          <tr class="">
+            <th scope="row">{{category.id}}</th>
+            <th>{{category.name}}</th>
+            <td><a href="#" class="btn btn-outline-primary btn-sm">Modifier</a></td>
+          </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+
+  </div>
+{% endblock %}
