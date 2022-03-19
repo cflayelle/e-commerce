@@ -5,7 +5,7 @@
     <title>
       {% block title %}Admin{% endblock %}
     </title>
-    <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 128 128%22><text y=%221.2em%22 font-size=%2296%22>⚫️</text></svg>">
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 128 128%22><text y=%221.2em%22 font-size=%2296%22>📚</text></svg>">
     <link rel="stylesheet" href="https://bootswatch.com/5/morph/bootstrap.min.css">
     {# Run `composer require symfony/webpack-encore-bundle` to start using Symfony UX #}
     {% block stylesheets %}
@@ -17,7 +17,7 @@
     {% endblock %}
   </head>
   <body class="position-relative">
-    <nav class="navbar navbar-expand-lg position-fixed top-0 left-0 vw-100 navbar-light bg-light">
+    <nav class="navbar navbar-expand-lg position-fixed top-0 left-0 vw-100 navbar-light bg-light" style="z-index: 100">
       <div class="container d-flex justify-content-between">
         <a class="navbar-brand" href="{{ path( 'admin_product') }}">BookShop Admin</a>
         <div>
