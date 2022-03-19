@@ -21,7 +21,11 @@
           <tr class="">
             <th scope="row">{{product.id}}</th>
             <th>{{product.name}}</th>
-            <td>Horreur</td>
+            <td>
+              {% for category in product.categories %}
+                {{category.name}},
+              {% endfor %}
+            </td>
             <td>{{product.quantity}}</td>
             <td>{{product.price}}</td>
             <td><a href="#" class="btn btn-outline-primary btn-sm">Modifier</a></td>

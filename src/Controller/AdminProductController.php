@@ -2,8 +2,10 @@
 
 namespace App\Controller;
 
+use App\Entity\Category;
 use App\Entity\Product;
 use App\Form\ProductType;
+use App\Repository\CategoryRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -25,17 +27,22 @@ class AdminProductController extends AbstractController
     }
 
     #[Route('/admin/product/new', name: 'admin_product_new')]
-    public function new(ObjectManager $manager, Request $request): Response
+    public function new(ObjectManager $manager, Request $request, CategoryRepository $categoryRepository): Response
     {
         $product = new Product;
         $form = $this->createForm(ProductType::class, $product);
         $form->handleRequest($request);
         if ($form->isSubmitted() && $form->isValid()) {
-        
+            $categories =  $form->get('categories')->getData();
+
+            foreach($categories as $category) {
+                $category->addProduct($product);
+            }
+
             $manager->persist($product);
             $manager->flush();
-        
-            $this->addFlash('success','Le produit a bien été ajouté');
+
+            $this->addFlash('success', 'Le produit a bien été ajouté');
 
             return $this->redirectToRoute('admin_product');
         }
