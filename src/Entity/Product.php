@@ -25,7 +25,7 @@ class Product
     private $images;
 
     #[ORM\Column(type: 'integer')]
-    private $quantity;
+    private $stock;
 
     #[ORM\Column(type: 'decimal', precision: 10, scale: 2)]
     private $price;
@@ -33,9 +33,13 @@ class Product
     #[ORM\ManyToMany(targetEntity: Category::class, mappedBy: 'products')]
     private $categories;
 
+    #[ORM\OneToMany(mappedBy: 'product', targetEntity: CartElement::class, orphanRemoval: true)]
+    private $cartElements;
+
     public function __construct()
     {
         $this->categories = new ArrayCollection();
+        $this->cartElements = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -79,14 +83,14 @@ class Product
         return $this;
     }
 
-    public function getQuantity(): ?int
+    public function getStock(): ?int
     {
-        return $this->quantity;
+        return $this->stock;
     }
 
-    public function setQuantity(int $quantity): self
+    public function setStock(int $stock): self
     {
-        $this->quantity = $quantity;
+        $this->stock = $stock;
 
         return $this;
     }
@@ -134,4 +138,34 @@ class Product
     {
         return $this->name;
     }
+
+     /**
+      * @return Collection<int, CartElement>
+      */
+     public function getCartElements(): Collection
+     {
+         return $this->cartElements;
+     }
+
+     public function addCartElement(CartElement $cartElement): self
+     {
+         if (!$this->cartElements->contains($cartElement)) {
+             $this->cartElements[] = $cartElement;
+             $cartElement->setProduct($this);
+         }
+
+         return $this;
+     }
+
+     public function removeCartElement(CartElement $cartElement): self
+     {
+         if ($this->cartElements->removeElement($cartElement)) {
+             // set the owning side to null (unless already changed)
+             if ($cartElement->getProduct() === $this) {
+                 $cartElement->setProduct(null);
+             }
+         }
+
+         return $this;
+     }
 }
