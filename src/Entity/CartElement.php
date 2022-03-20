@@ -20,6 +20,10 @@ class CartElement
     #[ORM\Column(type: 'integer')]
     private $quantity;
 
+    #[ORM\ManyToOne(targetEntity: Cart::class, inversedBy: 'cartElements')]
+    #[ORM\JoinColumn(nullable: false)]
+    private $cart;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -45,6 +49,18 @@ class CartElement
     public function setQuantity(int $quantity): self
     {
         $this->quantity = $quantity;
+
+        return $this;
+    }
+
+    public function getCart(): ?Cart
+    {
+        return $this->cart;
+    }
+
+    public function setCart(?Cart $cart): self
+    {
+        $this->cart = $cart;
 
         return $this;
     }

@@ -15,6 +15,8 @@ class CartController extends AbstractController
     #[Route('/cart', name: 'app_cart')]
     public function index(CartElementRepository $cartElementRepository): Response
     {
+        $this->denyAccessUnlessGranted('IS_AUTHENTICATED_FULLY');
+
         $cartElements = $cartElementRepository->findAll();
 
         return $this->render('cart/index.html.twig', [
@@ -24,6 +26,8 @@ class CartController extends AbstractController
     #[Route('/cart/add/{id}', name: 'app_cart_add')]
     public function add(Product $product, ObjectManager $manager): Response
     {
+        $this->denyAccessUnlessGranted('IS_AUTHENTICATED_FULLY');
+
         if (count($product->getCartElements()) > 0) {
             foreach ($product->getCartElements() as $cartElement) {
                 $cartElement->setQuantity($cartElement->getQuantity() + 1);
