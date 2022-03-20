@@ -44,4 +44,27 @@ class AdminCategoryController extends AbstractController
             'form' => $form->createView()
         ]);
     }
+
+    #[Route('/admin/category/{id}', name: 'admin_category_edit')]
+    public function edit(Category $category,ObjectManager $manager, Request $request): Response
+    {
+        $form = $this->createForm(CategoryType::class, $category);
+        $form->handleRequest($request);
+        if ($form->isSubmitted() && $form->isValid()) {
+            echo "hello";
+            $manager->persist($category);
+            $manager->flush();
+        
+            $this->addFlash('success','La catégorie a bien été ajouté');
+
+            return $this->redirectToRoute('admin_category');
+        }
+
+        dump($category);
+
+        return $this->render('admin_category/edit.html.twig', [
+            'form' => $form->createView(),
+            'category'=>$category
+        ]);
+    }
 }
