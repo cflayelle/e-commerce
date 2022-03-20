@@ -25,6 +25,7 @@
             <td>{{cartElement.product.stock}}</td>
             <td>
               <a href="{{path('app_cart_add',{id:cartElement.product.id})}}" class="btn btn-outline-primary btn-sm">Ajouter</a>
+              <a href="{{path('app_cart_remove',{id:cartElement.product.id})}}" class="btn btn-outline-danger btn-sm">Retirer</a>
             </td>
           </tr>
           {% else %}

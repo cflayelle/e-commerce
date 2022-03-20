@@ -56,4 +56,26 @@ class CartController extends AbstractController
 
         return $this->redirectToRoute('app_cart');
     }
+    #[Route('/cart/remove/{id}', name: 'app_cart_remove')]
+    public function remove(Product $product, ObjectManager $manager): Response
+    {
+        $this->denyAccessUnlessGranted('IS_AUTHENTICATED_FULLY');
+
+        $cart = $this->getUser()->getCart();
+
+        foreach ($cart->getCartElements() as $cartElement) {
+            if ($cartElement->getProduct() === $product) {
+                if($cartElement->getQuantity() > 1){
+                    $cartElement->setQuantity($cartElement->getQuantity() - 1);
+                }
+                else{
+                    $cart->removeCartElement($cartElement);
+                }
+            }
+        }
+
+        $manager->flush();
+
+        return $this->redirectToRoute('app_cart');
+    }
 }
