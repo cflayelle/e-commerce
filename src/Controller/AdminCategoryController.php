@@ -29,7 +29,6 @@ class AdminCategoryController extends AbstractController
         $form = $this->createForm(CategoryType::class, $category);
         $form->handleRequest($request);
         if ($form->isSubmitted() && $form->isValid()) {
-            echo "hello";
             $manager->persist($category);
             $manager->flush();
         
