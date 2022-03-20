@@ -36,7 +36,7 @@ class CartController extends AbstractController
 
         foreach ($cart->getCartElements() as $cartElement) {
             if ($cartElement->getProduct() === $product) {
-                if($cartElement->getQuantity() < $product->getStock()){
+                if ($cartElement->getQuantity() < $product->getStock()) {
                     $cartElement->setQuantity($cartElement->getQuantity() + 1);
                     $manager->flush();
                 }
@@ -65,12 +65,28 @@ class CartController extends AbstractController
 
         foreach ($cart->getCartElements() as $cartElement) {
             if ($cartElement->getProduct() === $product) {
-                if($cartElement->getQuantity() > 1){
+                if ($cartElement->getQuantity() > 1) {
                     $cartElement->setQuantity($cartElement->getQuantity() - 1);
-                }
-                else{
+                } else {
                     $cart->removeCartElement($cartElement);
                 }
+            }
+        }
+
+        $manager->flush();
+
+        return $this->redirectToRoute('app_cart');
+    }
+    #[Route('/cart/delete/{id}', name: 'app_cart_delete')]
+    public function delete(Product $product, ObjectManager $manager): Response
+    {
+        $this->denyAccessUnlessGranted('IS_AUTHENTICATED_FULLY');
+
+        $cart = $this->getUser()->getCart();
+
+        foreach ($cart->getCartElements() as $cartElement) {
+            if ($cartElement->getProduct() === $product) {
+                $cart->removeCartElement($cartElement);
             }
         }
 
