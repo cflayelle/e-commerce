@@ -39,7 +39,7 @@
                 <a class="nav-link" href="#">Pannier</a>
               </li>
               <li class="nav-item">
-                <a class="nav-link" href="#">Connexion</a>
+                <a class="nav-link" href="{{ path("app_login") }}">Connexion</a>
               </li>
             </ul>
           </div>
@@ -47,13 +47,13 @@
       </div>
     </nav>
 
-    <div class="container mt-4 pt-4">
+    <div class="container mt-4 pt-5">
       {% for message in app.flashes('success') %}
         <div style="margin-bottom:0;text-align:center;" class="alert alert-success">
           {{message}}
         </div>
       {% endfor %}
-      {% block body %}{% endblock %}
+        {% block body %}{% endblock %}
       {# <i>À rendre le Mardi 25 avril</i> #}
     </div>
   </body>
