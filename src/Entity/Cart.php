@@ -25,7 +25,7 @@ class Cart
     #[ORM\Column(type: 'datetime')]
     private $createdAt;
 
-    #[ORM\Column(type: 'decimal', precision: 10, scale: 3)]
+    #[ORM\Column(type: 'decimal', precision: 10, scale: 2)]
     private $totalPrice = 0;
 
     public function __construct()

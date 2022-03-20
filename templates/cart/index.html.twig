@@ -6,13 +6,14 @@
 
   <div class="example-wrapper">
     <h1>Votre Panier</h1>
-    <table class="table table-hover table-light table-striped">
+    {% if cartElements | length %}
+        <table class="table table-hover table-light table-striped">
       <thead>
         <tr class="table-dark">
           <th scope="col">Produit</th>
-          <th scope="col">Quantité</th>
           <th scope="col">Prix</th>
-          <th scope="col">Stock</th>
+          <th scope="col">Quantité</th>
+          <th scope="col">total</th>
           <th scope="col">Actions</th>
         </tr>
       </thead>
@@ -20,21 +21,29 @@
         {% for cartElement in cartElements %}
           <tr class="">
             <th>{{cartElement.product.name}}</th>
-            <td>{{cartElement.quantity}}</td>
-            <td>{{cartElement.product.price}}</td>
-            <td>{{cartElement.product.stock}}</td>
+            <td>{{cartElement.product.price}}€</td>
             <td>
-              <a href="{{path('app_cart_add',{id:cartElement.product.id})}}" class="btn btn-outline-primary btn-sm">Ajouter</a>
-              <a href="{{path('app_cart_remove',{id:cartElement.product.id})}}" class="btn btn-outline-warning btn-sm">Retirer</a>
+                <div class="btn-group" role="group" aria-label="Basic example">
+                    <a href="{{path('app_cart_add',{id:cartElement.product.id})}}" class="btn btn-outline-light btn-sm">+</a>
+                    <p class="btn btn-outline-light btn-sm">{{cartElement.quantity}}</p>
+                    <a href="{{path('app_cart_remove',{id:cartElement.product.id})}}" class="btn btn-outline-light btn-sm">-</a>
+                </div>
+               
+            </td>
+            <td>{{cartElement.product.price * cartElement.quantity}}€</td>
+            <td>
               <a href="{{path('app_cart_delete',{id:cartElement.product.id})}}" class="btn btn-outline-danger btn-sm">Supprimer</a>
             </td>
-          </tr>
-          {% else %}
-          <tr class="">
-            <td colspan="6">Votre est pannier est vide</td>
           </tr>
         {% endfor %}
       </tbody>
     </table>
+    <div class="d-flex justify-content-end align-items-end gap-4 mt-5">
+        <p>Prix total : {{app.user.cart.totalPrice}}€</p>
+        <a href="#" class="btn btn-outline-primary">Payer</a>
+    </div>
+    {% else %}
+    <div>Votre pannier est vide</div>
+    {% endif %}
   </div>
 {% endblock %}

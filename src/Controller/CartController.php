@@ -38,6 +38,8 @@ class CartController extends AbstractController
             if ($cartElement->getProduct() === $product) {
                 if ($cartElement->getQuantity() < $product->getStock()) {
                     $cartElement->setQuantity($cartElement->getQuantity() + 1);
+                    $cart->setTotalPrice($cart->getTotalPrice() + $product->getPrice());
+
                     $manager->flush();
                 }
                 return $this->redirectToRoute('app_cart');
@@ -47,6 +49,7 @@ class CartController extends AbstractController
         $cartElement = new CartElement();
         $cartElement->setQuantity(1);
         $cartElement->setProduct($product);
+        $cart->setTotalPrice($cart->getTotalPrice() + $product->getPrice());
         $cartElement->setCart($cart);
 
         $manager->persist($cartElement);
@@ -67,6 +70,8 @@ class CartController extends AbstractController
             if ($cartElement->getProduct() === $product) {
                 if ($cartElement->getQuantity() > 1) {
                     $cartElement->setQuantity($cartElement->getQuantity() - 1);
+                    $cart->setTotalPrice($cart->getTotalPrice() - $product->getPrice());
+
                 } else {
                     $cart->removeCartElement($cartElement);
                 }
@@ -86,6 +91,7 @@ class CartController extends AbstractController
 
         foreach ($cart->getCartElements() as $cartElement) {
             if ($cartElement->getProduct() === $product) {
+                $cart->setTotalPrice($cart->getTotalPrice() - $product->getPrice() * $cartElement->getQuantity());
                 $cart->removeCartElement($cartElement);
             }
         }
