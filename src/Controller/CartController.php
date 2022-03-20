@@ -36,11 +36,10 @@ class CartController extends AbstractController
 
         foreach ($cart->getCartElements() as $cartElement) {
             if ($cartElement->getProduct() === $product) {
-                $cartElement->setQuantity($cartElement->getQuantity() + 1);
-                $manager->persist($cartElement);
-
-                $manager->flush();
-
+                if($cartElement->getQuantity() < $product->getStock()){
+                    $cartElement->setQuantity($cartElement->getQuantity() + 1);
+                    $manager->flush();
+                }
                 return $this->redirectToRoute('app_cart');
             }
         }
