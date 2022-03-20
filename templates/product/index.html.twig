@@ -12,9 +12,9 @@
             </div>
             <div class="p-3 d-flex flex-column align-items-start">
                 <h1>{{product.name}}</h1>
-                <p><b>{{product.price}} € </b>/ En stock : {{product.quantity}}</p>
+                <p><b>{{product.price}} € </b>/ En stock : {{product.stock}}</p>
                 <p>{{product.description}}</p>
-                <a href="" class="btn btn-success d-flex align-items-center justify-content-center">
+                <a href="{{path('app_cart_add', {id:product.id})}}" class="btn btn-success d-flex align-items-center justify-content-center">
                     <i class="bi bi-cart-plus"></i>
                 </a>
             </div>
