@@ -28,7 +28,7 @@
             </td>
             <td>{{product.quantity}}</td>
             <td>{{product.price}}</td>
-            <td><a href="#" class="btn btn-outline-primary btn-sm">Modifier</a></td>
+            <td><a href="{{path('admin_product_edit',{id:product.id})}}" class="btn btn-outline-primary btn-sm">Modifier</a></td>
           </tr>
         {% endfor %}
       </tbody>

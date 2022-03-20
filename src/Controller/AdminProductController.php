@@ -27,7 +27,7 @@ class AdminProductController extends AbstractController
     }
 
     #[Route('/admin/product/new', name: 'admin_product_new')]
-    public function new(ObjectManager $manager, Request $request, CategoryRepository $categoryRepository): Response
+    public function new(ObjectManager $manager, Request $request): Response
     {
         $product = new Product;
         $form = $this->createForm(ProductType::class, $product);
@@ -51,6 +51,40 @@ class AdminProductController extends AbstractController
 
         return $this->render('admin_product/new.html.twig', [
             'form' => $form->createView()
+        ]);
+    }
+
+    #[Route('/admin/product/{id}', name: 'admin_product_edit')]
+    public function edit(Product $product, ObjectManager $manager, Request $request, CategoryRepository $categoryRepository): Response
+    {
+        $form = $this->createForm(ProductType::class, $product);
+        $form->handleRequest($request);
+        
+        if ($form->isSubmitted() && $form->isValid()) {
+            $categoriesData =  $form->get('categories')->getData();
+            $categories = $categoryRepository->findAll();
+
+            foreach($categories as $category){
+                $category->removeProduct($product);
+            }
+
+            foreach($categoriesData as $categoryData){
+                $categoryData->addProduct($product);
+            }
+
+            $manager->persist($product);
+            $manager->flush();
+
+            $this->addFlash('success', 'Le produit a bien été ajouté');
+
+            return $this->redirectToRoute('admin_product');
+        }
+
+        dump($product);
+
+        return $this->render('admin_product/edit.html.twig', [
+            'form' => $form->createView(),
+            'product'=>$product
         ]);
     }
 }

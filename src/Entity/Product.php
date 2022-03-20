@@ -130,7 +130,7 @@ class Product
         return $this;
     }
 
-    public function __toString()
+     public function __toString()
     {
         return $this->name;
     }

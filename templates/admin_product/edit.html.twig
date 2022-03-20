@@ -1,0 +1,25 @@
+{% extends 'admin.base.html.twig' %}
+
+{% block title %}Produits{% endblock %}
+
+{% form_theme form 'bootstrap_4_layout.html.twig' %}
+
+{% block body %}
+  <div class="pt-5">
+    <h1>Modifier le produit n°{{product.id}}</h1>
+    {{ form_start(form)}}
+    <div class="d-flex flex-column">
+      {{ form_row( form.name) }}
+      {{ form_row( form.description) }}
+      {{ form_row( form.images) }}
+      {{ form_row( form.quantity) }}
+      {{ form_row( form.price) }}
+      {{ form_row( form.categories) }}
+      <button class="btn btn-outline-primary my-3 align-self-end">
+        {{ button_label|default('Modifier') }}
+      </button>
+    </div>
+
+    {{ form_end(form)}}
+  </div>
+{% endblock %}
