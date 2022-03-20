@@ -23,6 +23,7 @@
     <label for="inputPassword" class="mt-4">Mot de passe</label>
     <input type="password" name="password" id="inputPassword" class="form-control" autocomplete="current-password"
         required="required">
+    <a href="{{ path('app_forgot_password_request') }}">Mot de passe oublié</a>
 
     <input type="hidden" name="_csrf_token" value="{{ csrf_token('authenticate') }}">
 
@@ -41,7 +42,7 @@
         <button class="btn btn-lg btn-outline-primary" type="submit">
             Se connecter
         </button>
-        <a href="{{ path('app_forgot_password_request') }}">Mot de passe oublié</a>
+        <a href="{{ path('app_register') }}">S'inscrire</a>
     </div>
 </form>
 {% endblock %}
