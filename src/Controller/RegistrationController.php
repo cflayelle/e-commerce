@@ -2,10 +2,12 @@
 
 namespace App\Controller;
 
+use App\Entity\Cart;
 use App\Entity\User;
 use App\Form\RegistrationFormType;
 use App\Security\EmailVerifier;
 use App\Security\LoginAuthenticator;
+use DateTime;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bridge\Twig\Mime\TemplatedEmail;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -43,6 +45,11 @@ class RegistrationController extends AbstractController
                 )
             );
 
+            $cart = new Cart();
+            $cart->setUser($user)
+                 ->setCreatedAt(new DateTime());
+
+            $entityManager->persist($cart);
             $entityManager->persist($user);
             $entityManager->flush();
 
