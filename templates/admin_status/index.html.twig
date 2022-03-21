@@ -1,0 +1,14 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello AdminStatusController!{% endblock %}
+
+{% block body %}
+
+
+<div class="">
+    <h1>Statuts</h1>
+    {% for status in statuses %}
+        <p>{{ status }}</p>
+    {% endfor %}
+</div>
+{% endblock %}
