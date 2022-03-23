@@ -45,6 +45,15 @@ class ProductRepository extends ServiceEntityRepository
         }
     }
 
+    public function findProductsAvailable(){
+        return $this->createQueryBuilder('p')
+                    ->andWhere('p.stock > 0')
+                    ->getQuery()
+                    ->getResult()
+        ;
+    }
+
+
     // /**
     //  * @return Product[] Returns an array of Product objects
     //  */
