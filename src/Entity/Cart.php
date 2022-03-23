@@ -28,6 +28,9 @@ class Cart
     #[ORM\JoinColumn(nullable: false)]
     private $user;
 
+    #[ORM\Column(type: 'integer')]
+    private $quantityTotal = 0;
+
     public function __construct()
     {
         $this->cartElements = new ArrayCollection();
@@ -100,6 +103,18 @@ class Cart
     public function setUser(?User $user): self
     {
         $this->user = $user;
+
+        return $this;
+    }
+
+    public function getQuantityTotal(): ?int
+    {
+        return $this->quantityTotal;
+    }
+
+    public function setQuantityTotal(int $quantityTotal): self
+    {
+        $this->quantityTotal = $quantityTotal;
 
         return $this;
     }
