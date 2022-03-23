@@ -35,6 +35,7 @@ class CartController extends AbstractController
     {
         $this->denyAccessUnlessGranted('IS_AUTHENTICATED_FULLY');
 
+
         $cart = $this->getUser()->getCurrentCart();
 
         foreach ($cart->getCartElements() as $cartElement) {

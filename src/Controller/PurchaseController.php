@@ -29,8 +29,26 @@ class PurchaseController extends AbstractController
     {
         $this->denyAccessUnlessGranted('IS_AUTHENTICATED_FULLY');
 
-        $purchase = new Purchase();
         $cart = $this->getUser()->getCurrentCart();
+
+        //vérifier produits < stock
+        foreach($cart->getCartElements() as $cartElement){
+            if($cartElement->getQuantity() > $cartElement->getProduct()->getStock()){
+
+                $this->addFlash('success',"Désolé, Un ou plusieurs produits ne sont plus disponible");
+                return $this->redirectToRoute('app_cart');
+            }
+        }
+
+        //Retirer les stocks 
+        foreach($cart->getCartElements() as $cartElement){
+            $product =  $cartElement->getProduct();
+            $productQuantity = $cartElement->getQuantity();
+
+            $product->setStock($product->getStock() - $productQuantity);
+        }
+
+        $purchase = new Purchase();
 
         $purchase->setPurchaseDate(new DateTime());
         $purchase->setCart($cart);
@@ -53,6 +71,8 @@ class PurchaseController extends AbstractController
 
         $manager->persist($purchase);
         $manager->flush();
+
+        $this->addFlash('success','Votre commande a bien été effectuée');
         
         return $this->redirectToRoute('app_cart');
 
