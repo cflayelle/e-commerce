@@ -7,6 +7,7 @@ use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\ORM\OptimisticLockException;
 use Doctrine\ORM\ORMException;
 use Doctrine\Persistence\ManagerRegistry;
+use phpDocumentor\Reflection\Types\Integer;
 
 /**
  * @method Purchase|null find($id, $lockMode = null, $lockVersion = null)
@@ -43,6 +44,17 @@ class PurchaseRepository extends ServiceEntityRepository
         if ($flush) {
             $this->_em->flush();
         }
+    }
+
+
+    public function findAllByUser(int $id)
+    {
+        return $this->createQueryBuilder('p')
+                    ->innerJoin('p.cart', 'c')
+                    ->andWhere('c.user = :id')
+                    ->setParameter('id', $id)
+                    ->getQuery()
+                    ->getResult();
     }
 
     // /**

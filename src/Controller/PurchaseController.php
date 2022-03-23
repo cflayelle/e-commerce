@@ -5,6 +5,7 @@ namespace App\Controller;
 use App\Entity\Cart;
 use App\Entity\Purchase;
 use App\Entity\Status;
+use App\Repository\PurchaseRepository;
 use App\Repository\StatusRepository;
 use DateTime;
 use Doctrine\Persistence\ObjectManager;
@@ -14,13 +15,15 @@ use Symfony\Component\Routing\Annotation\Route;
 
 class PurchaseController extends AbstractController
 {
-    #[Route('/purchase', name: 'app_purchase')]
-    public function index(): Response
+    #[Route('/commandes', name: 'app_purchase')]
+    public function index(PurchaseRepository $purchaseRepository): Response
     {
         $this->denyAccessUnlessGranted('IS_AUTHENTICATED_FULLY');
 
+        $purchases = $purchaseRepository->findAllByUser($this->getUser()->getId());
+
         return $this->render('purchase/index.html.twig', [
-            'controller_name' => 'PurchaseController',
+            "purchases" => $purchases
         ]);
     }
 

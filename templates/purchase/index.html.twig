@@ -1,20 +1,40 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Hello PurchaseController!{% endblock %}
+{% block title %}Commandes{% endblock %}
 
 {% block body %}
-<style>
-    .example-wrapper { margin: 1em auto; max-width: 800px; width: 95%; font: 18px/1.5 sans-serif; }
-    .example-wrapper code { background: #F5F5F5; padding: 2px 6px; }
-</style>
 
-<div class="example-wrapper">
-    <h1>Hello {{ controller_name }}! ✅</h1>
-
-    This friendly message is coming from:
-    <ul>
-        <li>Your controller at <code><a href="{{ '/Users/monmacbook/Desktop/M1TL/projet/bdd-relationnel/e-commerce/src/Controller/PurchaseController.php'|file_link(0) }}">src/Controller/PurchaseController.php</a></code></li>
-        <li>Your template at <code><a href="{{ '/Users/monmacbook/Desktop/M1TL/projet/bdd-relationnel/e-commerce/templates/purchase/index.html.twig'|file_link(0) }}">templates/purchase/index.html.twig</a></code></li>
-    </ul>
-</div>
+  <div class="example-wrapper">
+    <h1>Vos Commandes</h1>
+    {% if purchases | length %}
+        <table class="table table-hover table-light table-striped">
+      <thead>
+        <tr class="table-dark">
+          <th scope="col">Numéro de commandes</th>
+          <th scope="col">Statut</th>
+          <th scope="col">Quantité</th>
+          <th scope="col">Prix total</th>
+          <th scope="col">Date</th>
+          <th scope="col">Actions</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for purchase in purchases %}
+          <tr class="">
+            <th>{{purchase.id}}</th>
+            <td>{{purchase.status}}</td>
+            <td>Quantité</td>
+            <td>{{ purchase.cart.totalPrice }}€</td>
+            <td>{{ purchase.purchaseDate | date('d/m/Y')}}</td>
+            <td>
+                <a href="#" class="btn btn-sm btn-outline-primary">Voir détail</a>
+            </td>
+          </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+    {% else %}
+    <div>Vous n'avez passé aucune commande</div>
+    {% endif %}
+  </div>
 {% endblock %}
