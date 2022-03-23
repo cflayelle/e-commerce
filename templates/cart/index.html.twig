@@ -40,7 +40,7 @@
       </tbody>
     </table>
     <div class="d-flex justify-content-end align-items-end gap-4 mt-5">
-        <p>Prix total : {{app.user.cart.totalPrice}}€</p>
+        <p>Prix total : {{app.user.currentCart.totalPrice}}€</p>
         <a href="{{ path('app_purchase_pay') }}" class="btn btn-outline-primary">Payer</a>
     </div>
     {% else %}

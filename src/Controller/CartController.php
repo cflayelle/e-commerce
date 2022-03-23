@@ -21,8 +21,11 @@ class CartController extends AbstractController
 
         // $cartElements = $cartElementRepository->findAll();
 
-        $cartElements = $this->getUser()->getCart()->getCartElements();
+        $cart = $this->getUser()->getCurrentCart();
 
+        $cartElements = $cart->getCartElements();
+
+        // dd($cart);
         return $this->render('cart/index.html.twig', [
             'cartElements' => $cartElements,
         ]);
@@ -32,7 +35,7 @@ class CartController extends AbstractController
     {
         $this->denyAccessUnlessGranted('IS_AUTHENTICATED_FULLY');
 
-        $cart = $this->getUser()->getCart();
+        $cart = $this->getUser()->getCurrentCart();
 
         foreach ($cart->getCartElements() as $cartElement) {
             if ($cartElement->getProduct() === $product) {
@@ -64,7 +67,7 @@ class CartController extends AbstractController
     {
         $this->denyAccessUnlessGranted('IS_AUTHENTICATED_FULLY');
 
-        $cart = $this->getUser()->getCart();
+        $cart = $this->getUser()->getCurrentCart();
 
         foreach ($cart->getCartElements() as $cartElement) {
             if ($cartElement->getProduct() === $product) {
@@ -87,7 +90,7 @@ class CartController extends AbstractController
     {
         $this->denyAccessUnlessGranted('IS_AUTHENTICATED_FULLY');
 
-        $cart = $this->getUser()->getCart();
+        $cart = $this->getUser()->getCurrentCart();
 
         foreach ($cart->getCartElements() as $cartElement) {
             if ($cartElement->getProduct() === $product) {

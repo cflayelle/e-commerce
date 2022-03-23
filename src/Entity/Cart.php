@@ -18,15 +18,15 @@ class Cart
     #[ORM\OneToMany(mappedBy: 'cart', targetEntity: CartElement::class, orphanRemoval: true)]
     private $cartElements;
 
-    #[ORM\OneToOne(inversedBy: 'cart', targetEntity: User::class, cascade: ['persist', 'remove'])]
-    #[ORM\JoinColumn(nullable: false)]
-    private $user;
-
     #[ORM\Column(type: 'datetime')]
     private $createdAt;
 
     #[ORM\Column(type: 'decimal', precision: 10, scale: 2)]
     private $totalPrice = 0;
+
+    #[ORM\ManyToOne(targetEntity: User::class, inversedBy: 'carts')]
+    #[ORM\JoinColumn(nullable: false)]
+    private $user;
 
     public function __construct()
     {
@@ -68,18 +68,6 @@ class Cart
         return $this;
     }
 
-    public function getUser(): ?User
-    {
-        return $this->user;
-    }
-
-    public function setUser(User $user): self
-    {
-        $this->user = $user;
-
-        return $this;
-    }
-
     public function getCreatedAt(): ?\DateTimeInterface
     {
         return $this->createdAt;
@@ -100,6 +88,18 @@ class Cart
     public function setTotalPrice(string $totalPrice): self
     {
         $this->totalPrice = $totalPrice;
+
+        return $this;
+    }
+
+    public function getUser(): ?User
+    {
+        return $this->user;
+    }
+
+    public function setUser(?User $user): self
+    {
+        $this->user = $user;
 
         return $this;
     }
