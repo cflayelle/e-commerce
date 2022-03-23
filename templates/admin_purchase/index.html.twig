@@ -1,0 +1,42 @@
+{% extends 'admin.base.html.twig' %}
+
+{% block title %}Commandes{% endblock %}
+
+{% block body %}
+
+  <div class="example-wrapper">
+    <h1>Vos Commandes</h1>
+    {% if purchases | length %}
+        <table class="table table-hover table-light table-striped">
+      <thead>
+        <tr class="table-dark">
+          <th scope="col">Numéro de commandes</th>
+          <th scope="col">Utilisateurs</th>
+          <th scope="col">Statut</th>
+          <th scope="col">Quantité</th>
+          <th scope="col">Prix total</th>
+          <th scope="col">Date</th>
+          <th scope="col">Actions</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for purchase in purchases %}
+          <tr class="">
+            <th>{{purchase.id}}</th>
+            <th>{{purchase.cart.user.email}}</th>
+            <td>{{purchase.status}}</td>
+            <td>{{ purchase.cart.quantityTotal }}</td>
+            <td>{{ purchase.cart.totalPrice }}€</td>
+            <td>{{ purchase.purchaseDate | date('d/m/Y')}}</td>
+            <td>
+                <a href="#" class="btn btn-sm btn-outline-primary">Modifier le statut</a>
+            </td>
+          </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+    {% else %}
+    <div>Aucune commande passé</div>
+    {% endif %}
+  </div>
+{% endblock %}
