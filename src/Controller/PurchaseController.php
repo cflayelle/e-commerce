@@ -2,7 +2,9 @@
 
 namespace App\Controller;
 
+use App\Entity\Cart;
 use App\Entity\Purchase;
+use App\Entity\Status;
 use App\Repository\StatusRepository;
 use DateTime;
 use Doctrine\Persistence\ObjectManager;
@@ -28,15 +30,26 @@ class PurchaseController extends AbstractController
         $this->denyAccessUnlessGranted('IS_AUTHENTICATED_FULLY');
 
         $purchase = new Purchase();
-        $cart = $this->getUser()->getCart();
+        $cart = $this->getUser()->getCurrentCart();
 
         $purchase->setPurchaseDate(new DateTime());
         $purchase->setCart($cart);
 
         $status = $statusRepository->find(1);
+        if(!$status){
+            $status = new Status();
+            $status->setName("en cours");
+            
+            $manager->persist($status);
+        }
         $purchase->setStatus($status);
 
-        
+        $newCurrentCart = new Cart();
+        $newCurrentCart->setCreatedAt(new DateTime());
+        $newCurrentCart->setUser($this->getUser());
+
+
+        $manager->persist($newCurrentCart);
 
         $manager->persist($purchase);
         $manager->flush();
