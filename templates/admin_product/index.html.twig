@@ -23,7 +23,7 @@
             <th>{{product.name}}</th>
             <td>
               {% for category in product.categories %}
-                {{category.name}},
+                {{category.name}}{% if category != ( product.categories |last )%},{% endif %}
               {% endfor %}
             </td>
             <td>{{product.stock}}</td>
