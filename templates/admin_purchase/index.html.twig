@@ -13,10 +13,10 @@
           <th scope="col">Numéro de commandes</th>
           <th scope="col">Utilisateurs</th>
           <th scope="col">Statut</th>
-          <th scope="col">Quantité</th>
-          <th scope="col">Prix total</th>
-          <th scope="col">Date</th>
-          <th scope="col">Actions</th>
+          <th scope="col" class=" text-end ">Quantité</th>
+          <th scope="col" class=" text-end ">Prix total</th>
+          <th scope="col" class=" text-end ">Date</th>
+          <th scope="col" class=" text-center ">Actions</th>
         </tr>
       </thead>
       <tbody>
@@ -25,10 +25,10 @@
             <th>{{purchase.id}}</th>
             <th>{{purchase.cart.user.email}}</th>
             <td>{{purchase.status}}</td>
-            <td>{{ purchase.cart.quantityTotal }}</td>
-            <td>{{ purchase.cart.totalPrice }}€</td>
-            <td>{{ purchase.purchaseDate | date('d/m/Y')}}</td>
-            <td>
+            <td class=" text-end ">{{ purchase.cart.quantityTotal }}</td>
+            <td class=" text-end ">{{ purchase.cart.totalPrice }}€</td>
+            <td class=" text-end ">{{ purchase.purchaseDate | date('d/m/Y')}}</td>
+            <td class=" text-center ">
                 <a href="#" class="btn btn-sm btn-outline-primary">Modifier le statut</a>
             </td>
           </tr>
