@@ -27,9 +27,7 @@
                     <a href="{{path('app_cart_remove',{id:cartElement.product.id})}}" class="btn btn-outline-light btn-sm">-</a>
                     <p class="btn btn-outline-light btn-sm">{{cartElement.quantity}}</p>
                     <a href="{{path('app_cart_add',{id:cartElement.product.id})}}" class="btn btn-outline-light btn-sm">+</a>
-
                 </div>
-               
             </td>
             <td>{{cartElement.product.price * cartElement.quantity}}€</td>
             <td>

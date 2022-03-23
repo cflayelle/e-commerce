@@ -23,7 +23,7 @@
           <tr class="">
             <th>{{purchase.id}}</th>
             <td>{{purchase.status}}</td>
-            <td>Quantité</td>
+            <td>{{ purchase.cart.quantityTotal }}</td>
             <td>{{ purchase.cart.totalPrice }}€</td>
             <td>{{ purchase.purchaseDate | date('d/m/Y')}}</td>
             <td>

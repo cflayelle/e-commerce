@@ -41,6 +41,7 @@ class CartController extends AbstractController
         foreach ($cart->getCartElements() as $cartElement) {
             if ($cartElement->getProduct() === $product) {
                 if ($cartElement->getQuantity() < $product->getStock()) {
+                    $cart->setQuantityTotal($cart->getQuantityTotal() + 1);
                     $cartElement->setQuantity($cartElement->getQuantity() + 1);
                     $cart->setTotalPrice($cart->getTotalPrice() + $product->getPrice());
 
@@ -55,6 +56,9 @@ class CartController extends AbstractController
         $cartElement->setProduct($product);
         $cart->setTotalPrice($cart->getTotalPrice() + $product->getPrice());
         $cartElement->setCart($cart);
+
+        $cart->setQuantityTotal($cart->getQuantityTotal() + 1);
+
 
         $manager->persist($cartElement);
 
@@ -73,6 +77,7 @@ class CartController extends AbstractController
         foreach ($cart->getCartElements() as $cartElement) {
             if ($cartElement->getProduct() === $product) {
                 if ($cartElement->getQuantity() > 1) {
+                    $cart->setQuantityTotal($cart->getQuantityTotal() - 1);
                     $cartElement->setQuantity($cartElement->getQuantity() - 1);
                     $cart->setTotalPrice($cart->getTotalPrice() - $product->getPrice());
 
@@ -95,6 +100,7 @@ class CartController extends AbstractController
 
         foreach ($cart->getCartElements() as $cartElement) {
             if ($cartElement->getProduct() === $product) {
+                $cart->setQuantityTotal($cart->getQuantityTotal() - $cartElement->getQuantity());
                 $cart->setTotalPrice($cart->getTotalPrice() - $product->getPrice() * $cartElement->getQuantity());
                 $cart->removeCartElement($cartElement);
             }
