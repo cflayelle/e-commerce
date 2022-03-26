@@ -8,6 +8,8 @@ use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
+use Vich\UploaderBundle\Form\Type\VichImageType;
+
 
 class ProductType extends AbstractType
 {
@@ -23,6 +25,7 @@ class ProductType extends AbstractType
                 'class'=> Category::class,
                 'multiple'=>true,
             ])
+            ->add('imageFile', VichImageType::class)
         ;
     }
 

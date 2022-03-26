@@ -7,8 +7,10 @@
     <h1>Produits</h1>
     {% for product in products %}
         <article class="d-flex flex-row mb-3">
-            <div>
-                <img style="width: 200px; height: 200px; object-fit: contain; background-color: #cbd6e4;" src="{{product.images}}" alt="">
+            <div>            
+                <img style="width: 200px; height: 200px; object-fit: contain; background-color: #cbd6e4;"  
+                    src="{{ vich_uploader_asset(product)}}"
+                    alt="">
             </div>
             <div class="p-3 d-flex flex-column align-items-start">
                 <h1>{{product.name}}</h1>
@@ -17,6 +19,7 @@
                 <a href="{{path('app_cart_add', {id:product.id})}}" class="btn btn-success d-flex align-items-center justify-content-center">
                     <i class="bi bi-cart-plus"></i>
                 </a>
+
             </div>
         </article>
     {% endfor %}
