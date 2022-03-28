@@ -26,9 +26,6 @@ class Product
     #[ORM\Column(type: 'string', length: 255)]
     private $description;
 
-    #[ORM\Column(type: 'string', length: 255)]
-    private $images;
-
     #[ORM\Column(type: 'integer')]
     private $stock;
 
@@ -85,18 +82,6 @@ class Product
     public function setDescription(string $description): self
     {
         $this->description = $description;
-
-        return $this;
-    }
-
-    public function getImages(): ?string
-    {
-        return $this->images;
-    }
-
-    public function setImages(string $images): self
-    {
-        $this->images = $images;
 
         return $this;
     }
