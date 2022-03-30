@@ -6,8 +6,8 @@
 
 <div class="example-wrapper">
     <h1>Catégories</h1>
-     {% for category in categories %}
-        <div>{{category.name}}</div>
-    {% endfor %}
+        {% for category in categories %}
+            <a class="card p-3 my-2" style="width: 435px">{{category.name}}</a>
+        {% endfor %}
 </div>
 {% endblock %}
