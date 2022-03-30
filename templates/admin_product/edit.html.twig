@@ -14,7 +14,11 @@
       {{ form_row( form.stock) }}
       {{ form_row( form.price) }}
       {{ form_row( form.categories) }}
-      {{ form_row( form.imageFile) }}
+      <!-- <img src="{{ asset('/images/products/' ~ product.imageName) }}" alt="" width="150"> -->
+
+      <div style="width:150px">
+        {{ form_row( form.imageFile) }}
+      </div>
       <button class="btn btn-outline-primary my-3 align-self-end">
         {{ button_label|default('Modifier') }}
       </button>
