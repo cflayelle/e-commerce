@@ -24,7 +24,7 @@ class Product
     #[ORM\Column(type: 'string', length: 255)]
     private $name;
 
-    #[ORM\Column(type: 'string', length: 255)]
+    #[ORM\Column(type: 'text')]
     private $description;
 
     #[ORM\Column(type: 'integer')]

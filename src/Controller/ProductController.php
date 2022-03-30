@@ -3,6 +3,7 @@
 namespace App\Controller;
 
 use App\Entity\Category;
+use App\Entity\Product;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -21,10 +22,19 @@ class ProductController extends AbstractController
             'products' => $products
         ]);
     }
-
+    
+    /**
+     * @Route("/produit/{id}", name="show_product")
+     */
+    public function oneProduct(Product $product): Response
+    {
+        return $this->render('product/oneProducts.html.twig', [
+            'product' => $product
+        ]);
+    }
 
     /**
-     * @Route("/categorie/{id}/produits", name="categorie_products")
+     * @Route("/categorie/{id}/produits", name="category_products")
      */
     public function showProduct(Category $category): Response
     {
