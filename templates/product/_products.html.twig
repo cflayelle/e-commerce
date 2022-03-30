@@ -1,20 +1,22 @@
 {% for product in products %}
-    <a  href="{{ path( 'show_product', {id:product.id}) }}">
-        <article class="d-flex flex-row mb-3">
-            <div>            
-                <img style="width: 200px; height: 200px; object-fit: contain; background-color: #cbd6e4;"  
+ <div class="col-lg-4 col-md-4 col-sm-6 col-xs-12 d-flex justify-content-center">
+    <a  href="{{ path( 'show_product', {id:product.id}) }}" style="text-decoration:none;">
+        <article class="card mb-3 p-2" style="width: 400px;">
+            <div class="d-flex align-items-center justify-content-center">            
+                <img class="d-block user-select-none" style="width: 300px; height: 300px; object-fit: contain; background-color: #cbd6e4;"  
                     src="{{ vich_uploader_asset(product)}}"
                     alt="">
             </div>
-            <div class="p-3 d-flex flex-column align-items-start">
-                <h1>{{product.name}}</h1>
-                <p><b>{{product.price}} € </b>/ En stock : {{product.stock}}</p>
-                <p>{{product.description}}</p>
+            <div class="card-body">
+                <h1 class="card-title" style="height: 100px;">{{product.name}}</h1>
+                <p class="card-text"><b>{{product.price}} € </b>/ En stock : {{product.stock}}</p>
+                <p class="card-text">{{product.description | length > 50 ? product.description | slice (0,50) ~ '...' : product.description }}</p>
                 <a href="{{path('app_cart_add', {id:product.id})}}" class="btn btn-success d-flex align-items-center justify-content-center">
                     <i class="bi bi-cart-plus"></i>
                 </a>
 
             </div>
         </article>
- </a>
+    </a>
+</div>
 {% endfor %}
