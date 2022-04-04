@@ -5,7 +5,11 @@
 {% block body %}
 <div class="pt-5">
     <h1>Produits</h1>
-    {{ include('product/_products.html.twig') }}
+    <div style="display: block;">
+        <div  class="row">
+            {{ include('product/_products.html.twig') }}
+        </div>
+    </div>
 </div>
 {% endblock %}
 

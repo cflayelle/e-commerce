@@ -5,13 +5,19 @@
 {% block body %}
 
 <div class="example-wrapper">
-        <article style="height: 100vh;">
+    <div class="p-3">
+        <a href="{{ path('product') }}" class="btn btn-outline-info">
+           <i class="bi bi-arrow-left-square"></i>
+        </a>
+    </div>
+    <div>
+        <article class="d-flex flex-row mb-3">
             <div>            
-                <img style="width: 400px; height: 400px; object-fit: contain; background-color: #cbd6e4;"  
+                <img style="width: 500px; height: 500px; object-fit: contain; background-color: #cbd6e4;"  
                     src="{{ vich_uploader_asset(product)}}"
                     alt="">
             </div>
-            <div class="p-3 d-flex flex-column align-items-start">
+            <div class="p-4 d-flex flex-column align-items-start">
                 <h1>{{product.name}}</h1>
                 <p><b>{{product.price}} € </b>/ En stock : {{product.stock}}</p>
                 <p>{{product.description}}</p>
@@ -21,7 +27,7 @@
 
             </div>
         </article>
-    
+    </div>
 </div>
 </div>
 {% endblock %}
