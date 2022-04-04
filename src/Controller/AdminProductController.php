@@ -30,10 +30,13 @@ class AdminProductController extends AbstractController
     public function new(ObjectManager $manager, Request $request): Response
     {
         $product = new Product;
+
         $form = $this->createForm(ProductType::class, $product);
         $form->handleRequest($request);
         if ($form->isSubmitted() && $form->isValid()) {
             $categories =  $form->get('categories')->getData();
+
+            // $product->setStock(-5);
 
             foreach($categories as $category) {
                 $category->addProduct($product);

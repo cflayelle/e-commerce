@@ -27,8 +27,9 @@ class Product
     #[ORM\Column(type: 'text')]
     private $description;
 
-    #[ORM\Column(type: 'integer')]
+    // #[ORM\Column(type: 'integer')]
     #[Assert\PositiveOrZero(message:"Le stock doit être un nombre positif ou 0")]
+    #[ORM\Column(type:"integer", columnDefinition:"INT CHECK (stock > 0)")]
     private $stock;
 
     #[ORM\Column(type: 'decimal', precision: 10, scale: 2)]

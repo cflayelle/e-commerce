@@ -9,6 +9,7 @@ use App\Repository\PurchaseRepository;
 use App\Repository\StatusRepository;
 use DateTime;
 use Doctrine\Persistence\ObjectManager;
+use Exception;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -35,49 +36,56 @@ class PurchaseController extends AbstractController
         $cart = $this->getUser()->getCurrentCart();
 
         //vérifier produits < stock
-        foreach($cart->getCartElements() as $cartElement){
-            if($cartElement->getQuantity() > $cartElement->getProduct()->getStock()){
+        // foreach($cart->getCartElements() as $cartElement){
+        //     if($cartElement->getQuantity() > $cartElement->getProduct()->getStock()){
 
-                $this->addFlash('success',"Désolé, Un ou plusieurs produits ne sont plus disponible");
-                return $this->redirectToRoute('app_cart');
+        //         $this->addFlash('success',"Désolé, Un ou plusieurs produits ne sont plus disponible");
+        //         return $this->redirectToRoute('app_cart');
+        //     }
+        // }
+
+        $manager->getConnection()->beginTransaction(); // suspend auto-commit
+        try {
+            //Retirer les stocks 
+            foreach ($cart->getCartElements() as $cartElement) {
+                $product =  $cartElement->getProduct();
+                $productQuantity = $cartElement->getQuantity();
+
+                $product->setStock($product->getStock() - $productQuantity);
             }
+
+            $purchase = new Purchase();
+
+            $purchase->setPurchaseDate(new DateTime());
+            $purchase->setCart($cart);
+
+            $status = $statusRepository->find(1);
+            if (!$status) {
+                $status = new Status();
+                $status->setName("en cours");
+
+                $manager->persist($status);
+            }
+            $purchase->setStatus($status);
+
+            $newCurrentCart = new Cart();
+            $newCurrentCart->setCreatedAt(new DateTime());
+            $newCurrentCart->setUser($this->getUser());
+
+
+            $manager->persist($newCurrentCart);
+
+            $manager->persist($purchase);
+            $manager->flush();
+
+            $this->addFlash('success', 'Votre commande a bien été effectuée');
+
+            $manager->getConnection()->commit();
+        } catch (Exception $e) {
+            $manager->getConnection()->rollBack();
+            throw $e;
         }
 
-        //Retirer les stocks 
-        foreach($cart->getCartElements() as $cartElement){
-            $product =  $cartElement->getProduct();
-            $productQuantity = $cartElement->getQuantity();
-
-            $product->setStock($product->getStock() - $productQuantity);
-        }
-
-        $purchase = new Purchase();
-
-        $purchase->setPurchaseDate(new DateTime());
-        $purchase->setCart($cart);
-
-        $status = $statusRepository->find(1);
-        if(!$status){
-            $status = new Status();
-            $status->setName("en cours");
-            
-            $manager->persist($status);
-        }
-        $purchase->setStatus($status);
-
-        $newCurrentCart = new Cart();
-        $newCurrentCart->setCreatedAt(new DateTime());
-        $newCurrentCart->setUser($this->getUser());
-
-
-        $manager->persist($newCurrentCart);
-
-        $manager->persist($purchase);
-        $manager->flush();
-
-        $this->addFlash('success','Votre commande a bien été effectuée');
-        
         return $this->redirectToRoute('app_cart');
-
     }
 }
