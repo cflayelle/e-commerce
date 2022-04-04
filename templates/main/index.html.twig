@@ -4,10 +4,23 @@
 
 {% block body %}
 
-<div style="height: 100vh;">
-    <div class="bg-primary d-flex flex-column gap-5 justify-content-center align-items-center" style="height: 80%;">
-        <h1 class="text-white">Bienvenue</h1>
-        <a href="{{ path( 'product') }}" class="btn btn-primary">Voir tous les livres</a>
+<div class="home">
+    <div class="header bgc-light d-flex flex-column gap-5 justify-content-center align-items-center">
+        <div class="container text-center ">
+            <h1 class="bienvenue text-center">Bienvenue </h1>
+            <a href="{{ path( 'product') }}" class="btn btn-primary">Shopping</a>
+        </div>
+    </div>
+
+    <div class="category bgc-light mt-10 container rounded-10">
+        <span class="text-light bgc-primary py-2 px-5 rounded-pill text-center w-auto h2">Acheter par catégorie</span>
+        <div>
+            {% for i in 0..5 %}
+                <div>Roman</div>
+                <div>Science-fiction</div>
+            {% endfor %}
+        </div>
     </div>
 </div>
+
 {% endblock %}

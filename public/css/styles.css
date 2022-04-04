@@ -1,0 +1,48 @@
+
+:root{
+    --dark :  #2E150A;
+    --primary: #482006;
+    --light: #FFE69B;
+    --warning: #FAB303;
+    --danger: #E50101;
+}
+
+.bgc-primary{
+    background-color: var(--primary);
+}
+.bgc-dark{
+    background-color: var(--dark);
+}
+.bgc-light{
+    background-color: var(--light);
+}
+.bgc-warning{
+    background-color: var(--warning);
+}
+.bgc-danger{
+    background-color: var(--danger);
+}
+
+
+
+
+.header {
+    height: 100vh;
+}
+
+.mt-10 {
+    margin-top: 100px;
+}
+
+.rounded-10{
+    border-radius: 10px;
+}
+
+/* .bg-prim {
+    background-color: rgb(107, 205, 185);
+}
+
+.bg-prim-dark {
+    background-color: rgb(70, 132, 120);
+} */
+
