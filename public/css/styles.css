@@ -23,7 +23,11 @@
     background-color: var(--danger);
 }
 
-
+.flex-center{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
 
 
 .header {
@@ -34,9 +38,33 @@
     margin-top: 100px;
 }
 
+.mtc-2 {
+    margin-top: 10px;
+}
+
+.mtc-3 {
+    margin-top: 16px;
+}
+
+.mtc-4 {
+    margin-top: 20px;
+}
+
+.mtc-6 {
+    margin-top: 56px;
+}
+
+.-top-5 {
+    top: -20px;
+}
+
 .rounded-10{
     border-radius: 10px;
 }
+.rounded-max {
+    border-radius: 999px;
+}
+
 
 /* .bg-prim {
     background-color: rgb(107, 205, 185);
