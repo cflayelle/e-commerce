@@ -7,14 +7,15 @@
     --danger: #E50101;
 }
 
-html, *{
+html{
     box-sizing: border-box;
     margin: 0;
     padding: 0;
-    color:var(--primary)
+    color:var(--primary);
+    scroll-behavior: smooth;
 }
 
-html {
+html,body {
     color: var(--primary);
 }
 
@@ -25,6 +26,7 @@ a{
 
 a:hover{
     text-decoration: none;
+    color:inherit;
 }
 
 .product .img-lg{
@@ -102,7 +104,7 @@ a:hover{
     text-shadow: 2px 4px 2px #482006;
 }
 
-.section h1 {
+.section  h1 {
     font-weight: 600;
     color: var(--primary);
     font-size: 24px;
@@ -140,6 +142,7 @@ a:hover{
 
 .btnc-success:hover{
     color: #273F21;
+    background-color: hsl(109, 100%, 67%);
 }
 
 
@@ -200,10 +203,17 @@ a:hover{
     padding: 5px 10px;
     font-size: 11px;
     cursor: pointer;
+    transform: scale(1);
+    transition: transform .2s ease-in-out;
 }
 
 .tags .tag:nth-of-type(2n){
     background-color: #C5F8FF;
+}
+
+.tags .tag:hover{
+    z-index: 20;
+    transform: scale(1.2);
 }
 
 .one-product .content h1 {
@@ -213,6 +223,31 @@ a:hover{
 .text-lg {
     font-size: 30px;
 }
+
+.comment h1{
+    font-size: 22px;
+}
+
+.comment .auteur *{
+    color:rgba(72, 32, 6, 0.7);
+}
+
+.rates span{
+    text-decoration: underline;
+    text-decoration-color: transparent;
+   
+    -webkit-text-decoration-color: transparent;
+    -moz-text-decoration-color: transparent;
+    transition: .2s ease-in-out;
+}
+
+.rates:hover span{
+    text-decoration-color: var(--primary);
+   
+    -webkit-text-decoration-color: var(--primary);
+    -moz-text-decoration-color: var(--primary);
+}
+
 
 /* .bg-prim {
     background-color: rgb(107, 205, 185);
