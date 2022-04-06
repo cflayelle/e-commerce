@@ -11,13 +11,25 @@ html, *{
     box-sizing: border-box;
     margin: 0;
     padding: 0;
+    color:var(--primary)
 }
 
 html {
     color: var(--primary);
 }
 
+a{
+    text-decoration: none;
+    color:var(--primary)
+}
 
+a:hover{
+    text-decoration: none;
+}
+
+.section .text-bold{
+    font-weight: 700;
+}
 
 .bgc-primary{
     background-color: var(--primary);
@@ -148,6 +160,18 @@ html {
     border-radius: 999px;
 }
 
+.card-category {
+    width: 100%;
+    border : 1px solid rgba(72, 32, 6,0.3);
+    border-radius: 10px;
+    color: var(--primary);
+    background-color: #ffffff;
+    transition: background-color .3s ease-in-out;
+}
+
+.card-category:hover{
+    background-color: rgba(255, 230, 155,0.4);
+}
 
 /* .bg-prim {
     background-color: rgb(107, 205, 185);
