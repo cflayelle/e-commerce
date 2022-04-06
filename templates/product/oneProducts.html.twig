@@ -4,27 +4,39 @@
 
 {% block body %}
 
-<div class="example-wrapper">
-    <div class="p-3">
+<div class="section one-product pt-5">
+    {# <div class="p-3">
         <a href="{{ path('product') }}" class="btn btn-outline-info">
            <i class="bi bi-arrow-left-square"></i>
         </a>
-    </div>
-    <div>
-        <article class="d-flex flex-row mb-3">
+    </div> #}
+    <div class="mt-10 container product" >
+        <article class="d-flex flex-row justify-content-between mb-3">
             <div>            
-                <img style="width: 500px; height: 500px; object-fit: contain; background-color: #cbd6e4;"  
+                <img
                     src="{{ vich_uploader_asset(product)}}"
-                    alt="">
+                    alt=""
+                    class="img-lg"
+                >
             </div>
-            <div class="p-4 d-flex flex-column align-items-start">
+            <div class="d-flex content flex-column align-items-start col-sm-7 ">
                 <h1>{{product.name}}</h1>
-                <p><b>{{product.price}} € </b>/ En stock : {{product.stock}}</p>
-                <p>{{product.description}}</p>
-                <a href="{{path('app_cart_add', {id:product.id})}}" class="btn btn-success d-flex align-items-center justify-content-center">
-                    <i class="bi bi-cart-plus"></i>
+                <div class="my-3 flex-center justify-content-between w-100">
+                    <div class="text-lg text-bold">{{product.price}} €</div>
+                    <div class="flex-center">
+                        <img src="{{ asset('/images/utils/stars.png') }}" class="mr-2" alt="avatar" width="120"> 12 évaluations
+                    </div>
+                </div>
+                <div class="tags">
+                    {% for category in product.categories %}
+                        <div class="tag">{{ category }}</div>
+                    {% endfor %}
+                </div>
+                <a href="{{path('app_cart_add', {id:product.id})}}" class="btnc btnc-success mt-10">
+                    Ajouter au panier
                 </a>
-
+                <p class="mt-5">{{product.description}}</p>
+                <!-- TODO: mettre un "show more" -->
             </div>
         </article>
     </div>
