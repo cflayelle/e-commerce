@@ -26,9 +26,11 @@
   <body class="position-relative">
     {# <nav class="navbar navbar-expand-lg position-fixed top-0 left-0 vw-100 navbar-light bg-light" style="z-index: 100"> #}
     <nav class="navbar navbar-expand-lg fixed-top navbar-dark bgc-primary">
-      <div class="container d-flex justify-content-between">
-        <a class="navbar-brand" href="{{ path( 'home') }}">BookShop</a>
-        <div>
+      <div class="container d-flex flex-row justify-content-between">
+        <a class="navbar-brand text-uppercase" href="{{ path( 'home') }}">BookShop</a>
+        <!-- <div> -->
+          
+        <div class="d-flex">
           <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarColor03" aria-controls="navbarColor03" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
           </button>
@@ -44,21 +46,40 @@
               <li class="nav-item">
                 <a class="nav-link" href="{{ path( 'app_category') }}">Catégories</a>
               </li>
-              <li class="nav-item">
-                <a class="nav-link" href="{{path('app_cart')}}">Panier</a>
-              </li>
-              <li class="nav-item">
-                <a class="nav-link" href="{{path('app_purchase')}}">Commande</a>
-              </li>
+              <!-- <li>
               {% if is_granted('IS_AUTHENTICATED_FULLY') %}
                 <a class="nav-link active" aria-current="page" href="{{ path('app_logout') }}">Déconnexion</a>
               {% else %}
                 <a class="nav-link active" aria-current="page" href=" {{path('app_login') }} ">Connexion</a>
               {% endif %}
+              </li> -->
             </li>
           </ul>
         </div>
       </div>
+      <div class="flex">
+        <ul class="navbar-nav me-auto flex-center">
+          <li class="nav-item">
+            <a class="nav-link" href="#">
+              <img src="{{ asset('/images/utils/loupe.png') }}" alt="loupe" width="22">
+            </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="{{path('app_cart')}}">
+              <img src="{{ asset('/images/utils/caddie.png') }}" alt="panier" width="32">
+            </a>
+          </li>
+          <!-- <li class="nav-item">
+            <a class="nav-link" href="{{path('app_purchase')}}">Commande</a>
+          </li> -->
+          <li class="nav-item">
+            <a class="nav-link" href="#">
+              <img src="{{ asset('/images/utils/avatar.png') }}" alt="avatar" width="26">
+            </a>
+          </li>
+        </ul>
+      <!-- </div> -->
+    </div>
     </div>
   </nav>
 
