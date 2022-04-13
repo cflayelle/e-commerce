@@ -4,17 +4,21 @@
 
 {% block body %}
 
-<div class="container section">
+<div class="container section category">
     <h1 class="mt-10 text-center text-uppercase">Toutes les catégories</h1>
     <div class="mt-5 mb-5 d-flex justify-content-between">
-        <div>{{categories | length}} Catégories</div>
+        <div class="text-bold">{{categories | length}} Catégories</div>
         <div>
             <a href="#" class="btnc btnc-light ">Trier</a>
         </div>
     </div>
-    <div>
+    <div class="">
         {% for category in categories %}
-            <a class="card p-3 my-2"  href="{{ path( 'category_products', {id:category.id}) }}" style="width: 435px">{{category.name}}</a>
+            <a href="{{ path( 'category_products', {id:category.id}) }}">
+                <div class="card-category p-3 my-2">
+                    {{category.name}}
+                </div>
+            </a>
         {% endfor %}
     </div>
 </div>

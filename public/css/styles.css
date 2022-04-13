@@ -7,17 +7,55 @@
     --danger: #E50101;
 }
 
-html, *{
+html{
     box-sizing: border-box;
     margin: 0;
     padding: 0;
+    color:var(--primary);
+    scroll-behavior: smooth;
 }
 
-html {
+html,body {
     color: var(--primary);
 }
 
+a{
+    text-decoration: none;
+    color:var(--primary)
+}
 
+a:hover{
+    text-decoration: none;
+    color:inherit;
+}
+
+.text-underline {
+    text-decoration: underline;
+}
+.text-underline:hover {
+    text-decoration: underline;
+}
+
+.textc-warning{
+    color: var(--warning);
+}
+
+.textc-warning:hover{
+    color: var(--warning);
+}
+
+
+.product .img-lg{
+    /* background: rgb(238, 238, 238); */
+    object-fit: contain;
+    /* min-height: 430px; */
+    max-width: 400px;
+    /* box-shadow: 2px 4px 2px rgba(72, 32, 6, 0.45); */
+}
+
+.section .text-bold{
+    font-weight: 700;
+}
 
 .bgc-primary{
     background-color: var(--primary);
@@ -82,41 +120,53 @@ html {
     text-shadow: 2px 4px 2px #482006;
 }
 
-.section h1 {
+.section  h1 {
     font-weight: 600;
     color: var(--primary);
     font-size: 24px;
 }
 
 .btnc {
+    border: none;
     text-decoration: none;
     color: var(--primary);
     transition : background-color .3s ease-in-out;
     font-weight: 600;
+    border-radius: 999px;
+    padding: 15px 30px;
+    cursor: pointer;
+}
+
+.btnc:hover{
+    color: inherit;
 }
 
 .btnc-light {
     background-color: var(--light);
-    color: var(--primary);
-    border-radius: 999px;
-    padding: 15px 30px;
 }
 
 .btnc-light:hover{
-    color: inherit;
-    text-decoration: none;
     background-color: #ffd863;
 }
 
 .btnc-light:active{
-    color: inherit;
-    text-decoration: none;
     background-color: #ffbf00;
 }
 
 .card-text {
     color: var(--primary);
 }
+.btnc-success {
+    background-color: #A7FF92;
+    color: #273F21;
+}
+
+.btnc-success:hover{
+    color: #273F21;
+    background-color: hsl(109, 100%, 67%);
+}
+
+
 
 
 .mt-10 {
@@ -158,13 +208,101 @@ html {
 }
 .btn-success{
     background-color: var(--primary);
-    border-radius: 20px;
-}
-/* .bg-prim {
-    background-color: rgb(107, 205, 185);
+    border-radius: 40px;
 }
 
-.bg-prim-dark {
-    background-color: rgb(70, 132, 120);
-} */
+.card-category {
+    width: 100%;
+    border : 1px solid rgba(72, 32, 6,0.3);
+    border-radius: 10px;
+    color: var(--primary);
+    background-color: #ffffff;
+    transition: background-color .3s ease-in-out;
+}
 
+.card-category:hover{
+    background-color: rgba(255, 230, 155,0.4);
+}
+
+.tags{
+    display: flex;
+    margin-top: 10px;
+    gap:10px;
+}
+.tags .tag{
+    background-color: #FFC5C5;
+    margin-bottom: 20px;
+    padding: 5px 10px;
+    font-size: 11px;
+    cursor: pointer;
+    transform: scale(1);
+    transition: transform .2s ease-in-out;
+}
+
+.tags .tag:nth-of-type(2n){
+    background-color: #C5F8FF;
+}
+
+.tags .tag:hover{
+    z-index: 20;
+    transform: scale(1.2);
+}
+
+.one-product .content h1 {
+    font-size: 32px;
+}
+
+.text-lg {
+    font-size: 30px;
+}
+
+.comment h1{
+    font-size: 22px;
+}
+
+.comment .auteur *{
+    color:rgba(72, 32, 6, 0.7);
+}
+
+.rates span{
+    text-decoration: underline;
+    text-decoration-color: transparent;
+   
+    -webkit-text-decoration-color: transparent;
+    -moz-text-decoration-color: transparent;
+    transition: .2s ease-in-out;
+}
+
+.rates:hover span{
+    text-decoration-color: var(--primary);
+   
+    -webkit-text-decoration-color: var(--primary);
+    -moz-text-decoration-color: var(--primary);
+}
+
+
+.auth {
+    width: 100%;
+    /* border: solid 1px #e1e1e1;
+    border-radius: 10px;
+    background-color: white; */
+    /* overflow: hidden;
+    box-shadow: 2px 6px 18px rgba(72, 32, 6, 0.25); */
+}
+
+.auth > div {
+    width: 50%;
+    height: 100vh;
+}
+
+.auth .content{
+    padding: 100px 40px 40px 40px;
+}
+
+.auth .img {
+    /* background-color: #482006; */
+    /* background-image: linear-gradient( rgba(72, 32, 6, 0.45),rgba(72, 32, 6, 0.45)), url("https://images.unsplash.com/photo-1543002588-bfa74002ed7e?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=2730&q=80"); */
+    background-image: linear-gradient( rgba(72, 32, 6, 0.25),rgba(72, 32, 6, 0.25)), url("https://images.unsplash.com/photo-1572097560317-1189048dac38?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1035&q=80");
+    background-size: cover;
+    background-position: 0% 35%;
+}

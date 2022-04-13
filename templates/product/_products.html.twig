@@ -9,8 +9,12 @@
             </div>
             <div class="card-body p-2">
                 <h1 class="card-text" style="height: 60px; font-size: 18px">{{product.name}}</h1>
+                <div class="flex-center">
+                            <img src="{{ asset('/images/utils/stars.png') }}" class="mr-2" alt="stars" width="120">
+                            <span>12 évaluations</span>
+                </div>
                 <a href="{{path('app_cart_add', {id:product.id})}}" class="btn btn-success d-flex align-items-center justify-content-center">
-                    À partir de {{ product.price }}
+                    Ajouter au panier  {{ product.price }}
                 </a> 
 
             </div>
