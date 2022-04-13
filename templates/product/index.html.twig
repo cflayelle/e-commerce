@@ -3,8 +3,15 @@
 {% block title %}Produits{% endblock %}
 
 {% block body %}
-<div class="">
-    <h1>Produits</h1>
+<div class="container section">
+    <h1 class="mt-10 text-center text-uppercase">Toutes les catégories</h1>
+    <div class="mt-5 mb-5 d-flex justify-content-between">
+        <div>{{products | length}} Products</div>
+        <div>
+            <a href="#" class="btnc btnc-light ">Trier</a>
+            <a href="#" class="btnc btnc-light ">Filtrer</a>
+        </div>
+    </div>
     <div style="display: block;">
         <div  class="row">
             {{ include('product/_products.html.twig') }}

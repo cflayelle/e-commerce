@@ -114,7 +114,9 @@ html {
     background-color: #ffbf00;
 }
 
-
+.card-text {
+    color: var(--primary);
+}
 
 
 .mt-10 {
@@ -147,8 +149,17 @@ html {
 .rounded-max {
     border-radius: 999px;
 }
-
-
+.card-body{
+    font-size:12px;
+    color: #ffe69b7a;
+}
+.card-text p{
+    color: var(--primary);
+}
+.btn-success{
+    background-color: var(--primary);
+    border-radius: 20px;
+}
 /* .bg-prim {
     background-color: rgb(107, 205, 185);
 }
