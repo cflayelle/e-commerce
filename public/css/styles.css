@@ -162,8 +162,8 @@ a:hover{
 }
 
 .btnc-success:hover{
-    color: #273F21;
-    background-color: hsl(109, 100%, 67%);
+    color: #1c2619;
+    background-color: var(--light);
 }
 
 
@@ -305,4 +305,18 @@ a:hover{
     background-image: linear-gradient( rgba(72, 32, 6, 0.25),rgba(72, 32, 6, 0.25)), url("https://images.unsplash.com/photo-1572097560317-1189048dac38?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1035&q=80");
     background-size: cover;
     background-position: 0% 35%;
+}
+
+.col-lg-3{
+    border-radius: 5px;
+}
+.card {
+    width: 400px;
+}
+.etole.flex-center{
+   margin-bottom: 3px;
+}
+.text{
+    font-size: 12px;
+    color: #fff8e1;
 }

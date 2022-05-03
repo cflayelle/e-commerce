@@ -1,24 +1,23 @@
 {% for product in products %}
- <div class="col-lg-3 col-md-4 col-sm-6 col-xs-12 d-flex justify-content-center p-3">
-    <a  href="{{ path( 'show_product', {id:product.id}) }}" style="text-decoration:none; font-sizel: 20px;">
-        <article class="card mb-4" style="width: 400px;">
-            <div class="image d-flex align-items-center justify-content-center">   
-                <img class="d-block user-select-none p-3" style="width: 300px; height: 300px; object-fit: contain; background-color: #ffe69b7a;"  
-                    src="{{ vich_uploader_asset(product)}}"
-                    alt="">
-            </div>
-            <div class="card-body p-2">
-                <h1 class="card-text" style="height: 60px; font-size: 18px">{{product.name}}</h1>
-                <div class="flex-center">
-                            <img src="{{ asset('/images/utils/stars.png') }}" class="mr-2" alt="stars" width="120">
-                            <span>12 évaluations</span>
+    <div class="col-lg-3 col-md-4 col-sm-6 col-xs-12 d-flex justify-content-center p-3" style="height: 535px;">
+        <a  href="{{ path( 'show_product', {id:product.id}) }}" style="text-decoration:none; font-sizel: 20px;">
+            <article class="card mb-4">
+                <div class="image d-flex align-items-center justify-content-center">   
+                    <img class="d-block user-select-none p-2" style="width: 100%; height: 300px; object-fit: contain; background-color: #fff8e1;"  
+                        src="{{ vich_uploader_asset(product)}}"
+                        alt="">
                 </div>
-                <a href="{{path('app_cart_add', {id:product.id})}}" class="btn btn-success d-flex align-items-center justify-content-center">
-                    Ajouter au panier  {{ product.price }}
-                </a> 
-
-            </div>
-        </article>
-    </a>
-</div>
+                <div class="card-body p-2">
+                    <h1 class="card-text" style="height: 40%; font-size: 18px">{{product.name}}</h1>
+                    <div class="etole flex-left" style="height: 25%">
+                                <img src="{{ asset('/images/utils/stars.png') }}" class="mr-2" alt="stars" width="90">
+                                <span>12</span>
+                    </div>
+                    <a href="{{path('app_cart_add', {id:product.id})}}" class="btn btn-success d-flex align-items-center justify-content-center">
+                        Ajouter au panier  {{ product.price }} €
+                    </a> 
+                </div>
+            </article>
+        </a>
+    </div>
 {% endfor %}
