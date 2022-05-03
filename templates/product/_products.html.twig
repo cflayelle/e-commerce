@@ -1,19 +1,21 @@
 {% for product in products %}
- <div class="col-lg-4 col-md-4 col-sm-6 col-xs-12 d-flex justify-content-center">
-    <a  href="{{ path( 'show_product', {id:product.id}) }}" style="text-decoration:none;">
-        <article class="card mb-3 p-2" style="width: 400px;">
-            <div class="d-flex align-items-center justify-content-center">            
-                <img class="d-block user-select-none" style="width: 300px; height: 300px; object-fit: contain; background-color: #cbd6e4;"  
+ <div class="col-lg-3 col-md-4 col-sm-6 col-xs-12 d-flex justify-content-center p-3">
+    <a  href="{{ path( 'show_product', {id:product.id}) }}" style="text-decoration:none; font-sizel: 20px;">
+        <article class="card mb-4" style="width: 400px;">
+            <div class="image d-flex align-items-center justify-content-center">   
+                <img class="d-block user-select-none p-3" style="width: 300px; height: 300px; object-fit: contain; background-color: #ffe69b7a;"  
                     src="{{ vich_uploader_asset(product)}}"
                     alt="">
             </div>
-            <div class="card-body">
-                <h1 class="card-title" style="height: 100px;">{{product.name}}</h1>
-                <p class="card-text"><b>{{product.price}} € </b>/ En stock : {{product.stock}}</p>
-                <p class="card-text">{{product.description | length > 50 ? product.description | slice (0,50) ~ '...' : product.description }}</p>
+            <div class="card-body p-2">
+                <h1 class="card-text" style="height: 60px; font-size: 18px">{{product.name}}</h1>
+                <div class="flex-center">
+                            <img src="{{ asset('/images/utils/stars.png') }}" class="mr-2" alt="stars" width="120">
+                            <span>12 évaluations</span>
+                </div>
                 <a href="{{path('app_cart_add', {id:product.id})}}" class="btn btn-success d-flex align-items-center justify-content-center">
-                    <i class="bi bi-cart-plus"></i>
-                </a>
+                    Ajouter au panier  {{ product.price }}
+                </a> 
 
             </div>
         </article>

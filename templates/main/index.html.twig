@@ -4,10 +4,12 @@
 
 {% block body %}
 
-<div style="height: 100vh;">
-    <div class="bg-primary d-flex flex-column gap-5 justify-content-center align-items-center" style="height: 80%;">
-        <h1 class="text-white">Bienvenue</h1>
-        <a href="{{ path( 'product') }}" class="btn btn-primary">Voir tous les livres</a>
+<div class="home position-relative">
+    <div class="header d-flex flex-column gap-5 flex-center"></div>
+    <div class="content position-absolute text-center">
+        <h1 class="bienvenue text-center text-uppercase text-bold text-white mb-5">Bienvenue sur BookStore</h1>
+        <a href="{{ path( 'product') }}" class="btnc btnc-light ">Voir tous les livres</a>
     </div>
 </div>
+
 {% endblock %}

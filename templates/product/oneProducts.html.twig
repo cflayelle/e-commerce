@@ -4,29 +4,90 @@
 
 {% block body %}
 
-<div class="example-wrapper">
-    <div class="p-3">
+<div class="section container one-product pt-5">
+    {# <div class="p-3">
         <a href="{{ path('product') }}" class="btn btn-outline-info">
-           <i class="bi bi-arrow-left-square"></i>
+            <i class="bi bi-arrow-left-square"></i>
         </a>
-    </div>
-    <div>
-        <article class="d-flex flex-row mb-3">
-            <div>            
-                <img style="width: 500px; height: 500px; object-fit: contain; background-color: #cbd6e4;"  
-                    src="{{ vich_uploader_asset(product)}}"
-                    alt="">
+    </div> #}
+    <div class="mt-10  product">
+        <article class="d-flex flex-row justify-content-between mb-3">
+            <div>
+                <img src="{{ vich_uploader_asset(product)}}" alt="" class="img-lg">
             </div>
-            <div class="p-4 d-flex flex-column align-items-start">
+            <div class="d-flex content flex-column align-items-start col-sm-7 ">
                 <h1>{{product.name}}</h1>
-                <p><b>{{product.price}} € </b>/ En stock : {{product.stock}}</p>
-                <p>{{product.description}}</p>
-                <a href="{{path('app_cart_add', {id:product.id})}}" class="btn btn-success d-flex align-items-center justify-content-center">
-                    <i class="bi bi-cart-plus"></i>
+                <div class="my-3 flex-center justify-content-between w-100">
+                    <div class="text-lg text-bold">{{product.price}} €</div>
+                    <a href="#comments" class="rates">
+                        <div class="flex-center">
+                            <img src="{{ asset('/images/utils/stars.png') }}" class="mr-2" alt="stars" width="120">
+                            <span>12 évaluations</span>
+                        </div>
+                    </a>
+                </div>
+                <div class="tags">
+                    {% for category in product.categories %}
+                    <div class="tag">{{ category }}</div>
+                    {% endfor %}
+                </div>
+                <a href="{{path('app_cart_add', {id:product.id})}}" class="btnc btnc-success mt-10">
+                    Ajouter au panier
                 </a>
-
+                <p class="mt-5">{{product.description}}</p>
+                <!-- TODO: mettre un "show more" -->
             </div>
         </article>
+    </div>
+    <div class="mt-10 comments product" id="comments">
+        <div class="d-flex justify-content-between">
+            <div>
+                <h1>Commentaires Clients</h1>
+                <div class="d-flex align-items-center mt-3 mb-2">
+                    <img src="{{ asset('/images/utils/stars.png') }}" class="mr-2" alt="stars" width="120"> 4,9 sur 5
+                </div>
+                <span>12 évaluations</span>
+                <div class="mt-5">
+                    <a href="#" class="btnc btnc-light ">Trier par : le plus récent</a>
+                </div>
+            </div>
+            <div class="d-flex comment flex-column align-items-start col-sm-7 ">
+                <div class="mb-5">
+                    <h1>“Excellent je recommande”</h1>
+                    <div class="d-flex align-items-center mt-3 mb-2">
+                        <img src="{{ asset('/images/utils/stars.png') }}" class="mr-2" alt="stars" width="120">
+                    </div>
+                    <p>
+                        Il suffit de lire quelques pages pour ne plus pouvoir s'arrêter... Une ambiance très british
+                        comme on les aime ! Le puzzle de l'histoire est construit sur un triangle : d'un côté une mère
+                        de famille quarantenaire et bohème un peu empêtrée dans ses problèmes familiaux et amoureux, de
+                        l'autre une jeune traductrice ukrainienne fraichement débarquée sur le sol anglais après avoir
+                        épousé un homme qui vient subitement de disparaitre alors qu'il semblait très épris d'elle, et
+                        au milieu un homme échoué sur une plage totalement amnésique sous la pluie et sous les fenêtres
+                        de notre mère de famille chez qui il ne va pas tarder à trouver refuge... Après, à vous de
+                        voir.... ! moi j'ai beaucoup aimé !
+                    </p>
+                    <span class="auteur"><b>Paul G</b></span>
+                </div>
+                <div class="mb-5">
+                    <h1>“Pas mal sans plus”</h1>
+                    <div class="d-flex align-items-center mt-3 mb-2">
+                        <img src="{{ asset('/images/utils/stars.png') }}" class="mr-2" alt="stars" width="120">
+                    </div>
+                    <p>
+                        Il suffit de lire quelques pages pour ne plus pouvoir s'arrêter... Une ambiance très british
+                        comme on les aime ! Le puzzle de l'histoire est construit sur un triangle : d'un côté une mère
+                        de famille quarantenaire et bohème un peu empêtrée dans ses problèmes familiaux et amoureux, de
+                        l'autre une jeune traductrice ukrainienne fraichement débarquée sur le sol anglais après avoir
+                        épousé un homme qui vient subitement de disparaitre alors qu'il semblait très épris d'elle, et
+                        au milieu un homme échoué sur une plage totalement amnésique sous la pluie et sous les fenêtres
+                        de notre mère de famille chez qui il ne va pas tarder à trouver refuge... Après, à vous de
+                        voir.... ! moi j'ai beaucoup aimé !
+                    </p>
+                    <span class="auteur"><b>Sophie</b></span>
+                </div>
+            </div>
+        </div>
     </div>
 </div>
 </div>
