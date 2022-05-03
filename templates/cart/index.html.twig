@@ -4,45 +4,51 @@
 
 {% block body %}
 
-  <div class="example-wrapper">
-    <h1>Votre Panier</h1>
-    {% if cartElements | length %}
-        <table class="table table-hover table-light table-striped">
-      <thead>
-        <tr class="table-dark">
-          <th scope="col">Produit</th>
-          <th scope="col">Prix</th>
-          <th scope="col">Quantité</th>
-          <th scope="col">total</th>
-          <th scope="col">Actions</th>
-        </tr>
-      </thead>
-      <tbody>
-        {% for cartElement in cartElements %}
-          <tr class="">
-            <th>{{cartElement.product.name}}</th>
-            <td>{{cartElement.product.price}}€</td>
-            <td>
-                <div class="btn-group" role="group" aria-label="Basic example">
-                    <a href="{{path('app_cart_remove',{id:cartElement.product.id})}}" class="btn btn-outline-light btn-sm">-</a>
-                    <p class="btn btn-outline-light btn-sm">{{cartElement.quantity}}</p>
-                    <a href="{{path('app_cart_add',{id:cartElement.product.id})}}" class="btn btn-outline-light btn-sm">+</a>
-                </div>
-            </td>
-            <td>{{cartElement.product.price * cartElement.quantity}}€</td>
-            <td>
-              <a href="{{path('app_cart_delete',{id:cartElement.product.id})}}" class="btn btn-outline-danger btn-sm">Supprimer</a>
-            </td>
-          </tr>
-        {% endfor %}
-      </tbody>
-    </table>
-    <div class="d-flex justify-content-end align-items-end gap-4 mt-5">
-        <p>Prix total : {{app.user.currentCart.totalPrice}}€</p>
-        <a href="{{ path('app_purchase_pay') }}" class="btn btn-outline-primary">Payer</a>
+<div class="container mt-10">
+  <h1>Mon Panier</h1>
+  <div class="border rounded-10 mt-5 mb-3 px-3 pt-3">
+    <div class="row border-bottom pb-3">
+      <div class="col-6">Article(s)</div>
+      <div class="col">Prix</div>
+      <div class="col">Quantité</div>
+      <div class="col">Total</div>
+      <!-- <div class="col">Actions</div> -->
     </div>
+    {% if cartElements | length %}
+    {% for cartElement in cartElements %}
+    <div class="row py-4">
+      <div class="col-6 d-flex">
+        <div class="mr-3">
+          <img src="{{ vich_uploader_asset(cartElement.product)}}" alt="" style="width: 116px; objectif-fit:contain">
+        </div>
+        <div class="d-flex flex-column justify-content-between">
+          <div>
+            {{cartElement.product.name}}
+          </div>
+          <div>
+            <a href="{{path('app_cart_delete',{id:cartElement.product.id})}}"
+              class="btn btn-outline-danger btn-sm">Effacer</a>
+          </div>
+        </div>
+      </div>
+      <div class="col">{{cartElement.product.price}}€</div>
+      <div class="col">
+        <div class="btn-group align-items-start" role="group" aria-label="Basic example">
+          <a href="{{path('app_cart_remove',{id:cartElement.product.id})}}" class="btn btn-outline-dark btn-sm">-</a>
+          <p class="btn btn-outline-dark btn-sm disabled">{{cartElement.quantity}}</p>
+          <a href="{{path('app_cart_add',{id:cartElement.product.id})}}" class="btn btn-outline-dark btn-sm">+</a>
+        </div>
+      </div>
+      <div class="col">{{cartElement.product.price * cartElement.quantity}}€</div>
+    </div>
+    {% endfor %}
     {% else %}
     <div>Votre pannier est vide</div>
     {% endif %}
   </div>
+  <div class="d-flex justify-content-end align-items-end gap-4 mt-5">
+    <p class="mr-3">Prix total : {{app.user.currentCart.totalPrice}}€</p>
+    <a href="{{ path('app_purchase_pay') }}" class="btnc btnc-light px-5">Payer</a>
+  </div>
+</div>
 {% endblock %}
