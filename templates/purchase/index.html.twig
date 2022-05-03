@@ -4,37 +4,34 @@
 
 {% block body %}
 
-  <div class="example-wrapper">
-    <h1>Vos Commandes</h1>
-    {% if purchases | length %}
-        <table class="table table-hover table-light table-striped">
-      <thead>
-        <tr class="table-dark">
-          <th scope="col">Numéro de commandes</th>
-          <th scope="col">Statut</th>
-          <th scope="col">Quantité</th>
-          <th scope="col">Prix total</th>
-          <th scope="col">Date</th>
-          <th scope="col">Actions</th>
-        </tr>
-      </thead>
-      <tbody>
-        {% for purchase in purchases %}
-          <tr class="">
-            <th>{{purchase.id}}</th>
-            <td>{{purchase.status}}</td>
-            <td>{{ purchase.cart.quantityTotal }}</td>
-            <td>{{ purchase.cart.totalPrice }}€</td>
-            <td>{{ purchase.purchaseDate | date('d/m/Y')}}</td>
-            <td>
-                <a href="#" class="btn btn-sm btn-outline-primary">Voir détail</a>
-            </td>
-          </tr>
-        {% endfor %}
-      </tbody>
-    </table>
-    {% else %}
+  <div class="container mt-10">
+    <h1>Mes Commandes</h1>
+  {% if purchases | length %}
+  <div class="border rounded-10 mt-5 mb-3 px-3 pt-3">
+    <div class="row border-bottom pb-3">
+      <div class="col-6">Numéro de commandes</div>
+      <div class="col">Statut</div>
+      <div class="col">Quantité</div>
+      <div class="col">Prix total</div>
+      <div class="col">Date</div>
+      <div class="col">Actions</div>
+      <!-- <div class="col">Actions</div> -->
+    </div>
+    {% for purchase in purchases %}
+    <div class="row py-4">
+      <div class="col-6">{{purchase.id}}</div>
+      <div class="col">{{purchase.status}}</div>
+      <div class="col">{{ purchase.cart.quantityTotal }}</div>
+      <div class="col">{{ purchase.cart.totalPrice }}€</div>
+      <div class="col">{{ purchase.purchaseDate | date('d/m/Y')}}</div>
+      <div class="col">
+          <a href="#" class="btn btn-sm btn-outline-primary">Voir détail</a>
+      </div>
+      <!-- <div class="col">Actions</div> -->
+    </div>
+    {% endfor %}
+  {% else %}
     <div>Vous n'avez passé aucune commande</div>
-    {% endif %}
+  {% endif %}
   </div>
 {% endblock %}
