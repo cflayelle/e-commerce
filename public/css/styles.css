@@ -156,16 +156,26 @@ a:hover{
 .card-text {
     color: var(--primary);
 }
-.btnc-success {
-    background-color: #A7FF92;
-    color: #273F21;
+/* .btnc-success {
+    background-color: var(--primary);
+    color: var(--primary);
 }
 
 .btnc-success:hover{
-    color: #1c2619;
+    color: var(--light);
     background-color: var(--light);
+} */
+a.btn.btn-success.d-flex.align-items-center.justify-content-center {
+    background-color: var(--primary);
+    border-color: var(--primary);
+    color: white;
+    border-radius: 20px;
 }
-
+a.btn.btn-success.d-flex.align-items-center.justify-content-center:hover {
+    color: var(--dark);
+    background-color: var(--light);
+    border-color: var(--light);
+}
 
 
 
@@ -205,10 +215,6 @@ a:hover{
 }
 .card-text p{
     color: var(--primary);
-}
-.btn-success{
-    background-color: var(--primary);
-    border-radius: 40px;
 }
 
 .card-category {
