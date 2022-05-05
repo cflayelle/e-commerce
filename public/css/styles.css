@@ -156,15 +156,21 @@ a:hover{
 .card-text {
     color: var(--primary);
 }
-/* .btnc-success {
-    background-color: var(--primary);
-    color: var(--primary);
+.btnc-success {
+    background-color: #A7FF92;
+    color: #273F21;
 }
 
-.btnc-success:hover{
+/* .btnc-success:hover{
     color: var(--light);
     background-color: var(--light);
 } */
+
+.btnc-success:hover{
+    color: #273F21;
+    background-color: hsl(109, 100%, 67%);
+}
+
 a.btn.btn-success.d-flex.align-items-center.justify-content-center {
     background-color: var(--primary);
     border-color: var(--primary);

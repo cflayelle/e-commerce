@@ -4,8 +4,9 @@
 
 {% block body %}
 
-<div class="container mt-10">
+<div class="container mt-10 mb-5">
   <h1>Mon Panier</h1>
+  {% if cartElements | length %}
   <div class="border rounded-10 mt-5 mb-3 px-3 pt-3">
     <div class="row border-bottom pb-3">
       <div class="col-6">Article(s)</div>
@@ -14,7 +15,6 @@
       <div class="col">Total</div>
       <!-- <div class="col">Actions</div> -->
     </div>
-    {% if cartElements | length %}
     {% for cartElement in cartElements %}
     <div class="row py-4">
       <div class="col-6 d-flex">
@@ -41,14 +41,26 @@
       </div>
       <div class="col">{{cartElement.product.price * cartElement.quantity}}€</div>
     </div>
-    {% endfor %}
-    {% else %}
-    <div>Votre pannier est vide</div>
-    {% endif %}
-  </div>
-  <div class="d-flex justify-content-end align-items-end gap-4 mt-5">
-    <p class="mr-3">Prix total : {{app.user.currentCart.totalPrice}}€</p>
-    <a href="{{ path('app_purchase_pay') }}" class="btnc btnc-light px-5">Payer</a>
-  </div>
+{% endfor %}
 </div>
+<div class="d-flex justify-content-end align-items-end gap-4 mt-5">
+  <p class="mr-3">Prix total :
+    {{app.user.currentCart.totalPrice}}€
+  </p>
+  <a href="{{ path('app_purchase_pay') }}" class="btnc btnc-light px-5">Payer</a>
+</div>
+
+
+{% else %}
+<div class="mt-5 text-center d-flex flex-column justify-content-center" style="min-height: 55vh;">
+  <h3 class="">
+    Votre pannier est vide.
+  </h3>
+  <p class="mt-5">
+    <a class="btnc btnc-light" href="{{ path( 'product') }}">Ajouter des livres</a>  
+  </p>
+</div>
+{% endif %}
+</div>
+
 {% endblock %}

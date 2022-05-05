@@ -6,32 +6,39 @@
 
   <div class="container mt-10">
     <h1>Mes Commandes</h1>
-  {% if purchases | length %}
-  <div class="border rounded-10 mt-5 mb-3 px-3 pt-3">
-    <div class="row border-bottom pb-3">
-      <div class="col-6">Numéro de commandes</div>
-      <div class="col">Statut</div>
-      <div class="col">Quantité</div>
-      <div class="col">Prix total</div>
-      <div class="col">Date</div>
-      <div class="col">Actions</div>
-      <!-- <div class="col">Actions</div> -->
+    {% if purchases | length %}
+      <div class="border rounded-10 mt-5 mb-3 px-3 pt-3">
+        <div class="row border-bottom pb-3">
+          <div class="col-6">Numéro de commandes</div>
+          <div class="col">Statut</div>
+          <div class="col">Quantité</div>
+          <div class="col">Prix total</div>
+          <div class="col">Date</div>
+          <div class="col">Actions</div>
+          <!-- <div class="col">Actions</div> -->
+        </div>
+        {% for purchase in purchases %}
+          <div class="row py-4">
+            <div class="col-6">{{purchase.id}}</div>
+            <div class="col">{{purchase.status}}</div>
+            <div class="col">{{ purchase.cart.quantityTotal }}</div>
+            <div class="col">{{ purchase.cart.totalPrice }}€</div>
+            <div class="col">{{ purchase.purchaseDate | date('d/m/Y')}}</div>
+            <div class="col">
+              <a href="#" class="btn btn-sm btn-outline-primary">Voir détail</a>
+            </div>
+            <!-- <div class="col">Actions</div> -->
+          </div>
+        {% endfor %}
+      {% else %}
+        <div class="mt-5 text-center d-flex flex-column justify-content-center" style="min-height: 55vh;">
+          <h3 class="">
+            Vous n'avez aucune commande passé
+          </h3>
+          <p class="mt-5">
+            <a class="btnc btnc-light" href="{{ path( 'product') }}">Acheter des livres</a>
+          </p>
+        </div>
+      {% endif %}
     </div>
-    {% for purchase in purchases %}
-    <div class="row py-4">
-      <div class="col-6">{{purchase.id}}</div>
-      <div class="col">{{purchase.status}}</div>
-      <div class="col">{{ purchase.cart.quantityTotal }}</div>
-      <div class="col">{{ purchase.cart.totalPrice }}€</div>
-      <div class="col">{{ purchase.purchaseDate | date('d/m/Y')}}</div>
-      <div class="col">
-          <a href="#" class="btn btn-sm btn-outline-primary">Voir détail</a>
-      </div>
-      <!-- <div class="col">Actions</div> -->
-    </div>
-    {% endfor %}
-  {% else %}
-    <div>Vous n'avez passé aucune commande</div>
-  {% endif %}
-  </div>
-{% endblock %}
+  {% endblock %}
