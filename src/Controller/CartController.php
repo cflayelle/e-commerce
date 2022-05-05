@@ -38,9 +38,10 @@ class CartController extends AbstractController
 
         $cart = $this->getUser()->getCurrentCart();
 
+        // Ajouter un produit existant dans le panier
         foreach ($cart->getCartElements() as $cartElement) {
             if ($cartElement->getProduct() === $product) {
-                if ($cartElement->getQuantity() < $product->getStock()) {
+                if ($cartElement->getQuantity() <= $product->getStock()) {
                     $cart->setQuantityTotal($cart->getQuantityTotal() + 1);
                     $cartElement->setQuantity($cartElement->getQuantity() + 1);
                     $cart->setTotalPrice($cart->getTotalPrice() + $product->getPrice());
@@ -51,6 +52,7 @@ class CartController extends AbstractController
             }
         }
 
+        // Ajouter un nouveau produit dans le panier
         $cartElement = new CartElement();
         $cartElement->setQuantity(1);
         $cartElement->setProduct($product);
@@ -67,6 +69,7 @@ class CartController extends AbstractController
 
         return $this->redirectToRoute('app_cart');
     }
+    
     #[Route('/cart/remove/{id}', name: 'app_cart_remove')]
     public function remove(Product $product, ObjectManager $manager): Response
     {
@@ -76,13 +79,13 @@ class CartController extends AbstractController
 
         foreach ($cart->getCartElements() as $cartElement) {
             if ($cartElement->getProduct() === $product) {
-                if ($cartElement->getQuantity() > 1) {
+                if($cartElement->getQuantity() <= 1){
+                    $cart->removeCartElement($cartElement);
+                }
+                if ($cartElement->getQuantity() > 0) {                   
                     $cart->setQuantityTotal($cart->getQuantityTotal() - 1);
                     $cartElement->setQuantity($cartElement->getQuantity() - 1);
                     $cart->setTotalPrice($cart->getTotalPrice() - $product->getPrice());
-
-                } else {
-                    $cart->removeCartElement($cartElement);
                 }
             }
         }
