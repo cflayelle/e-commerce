@@ -41,7 +41,7 @@ class CartController extends AbstractController
         // Ajouter un produit existant dans le panier
         foreach ($cart->getCartElements() as $cartElement) {
             if ($cartElement->getProduct() === $product) {
-                if ($cartElement->getQuantity() <= $product->getStock()) {
+                if ($cartElement->getQuantity() < $product->getStock()) {
                     $cart->setQuantityTotal($cart->getQuantityTotal() + 1);
                     $cartElement->setQuantity($cartElement->getQuantity() + 1);
                     $cart->setTotalPrice($cart->getTotalPrice() + $product->getPrice());
