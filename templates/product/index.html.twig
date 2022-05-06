@@ -4,7 +4,7 @@
 
 {% block body %}
 <div class="container section">
-    <h1 class="mt-10 text-center text-uppercase">Toutes les catégories</h1>
+    <h1 class="mt-10 text-center text-uppercase">Tous les livres</h1>
     <div class="mt-5 mb-5 d-flex justify-content-between">
         <div>{{products | length}} Products</div>
         <div>
@@ -12,13 +12,8 @@
             <a href="#" class="btnc btnc-light ">Filtrer</a>
         </div>
     </div>
-    <div style="display: block;">
-        <div  class="row">
-            {{ include('product/_products.html.twig') }}
-        </div>
+    <div class="products-container">
+        {{ include('product/_products.html.twig') }}
     </div>
 </div>
 {% endblock %}
-
-
-  
