@@ -22,7 +22,14 @@ class SearchType extends AbstractType
                 'label' => false,
                 'required' => false,
                 'attr' => [
-                    'placeholder' => 'Rechercher'
+                    'placeholder' => 'Rechercher par nom'
+                ]
+            ])
+            ->add('qDescription', TextType::class, [
+                'label' => false,
+                'required' => false,
+                'attr' => [
+                    'placeholder' => 'Rechercher par description'
                 ]
             ])
             ->add('categories', EntityType::class, [

@@ -103,6 +103,12 @@ class ProductRepository extends ServiceEntityRepository
                 ->setParameter('qName', "%{$search->qName}%");
         }
 
+        if (!empty($search->qDescription)) {
+            $query = $query
+                ->andWhere('p.description LIKE :qDescription')
+                ->setParameter('qDescription', "%{$search->qDescription}%");
+        }
+
         if (!empty($search->min)) {
             $query = $query
                 ->andWhere('p.price >= :min')

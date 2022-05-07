@@ -16,6 +16,11 @@ class SearchData
     public $qName = '';
 
     /**
+     * @var string
+     */
+    public $qDescription = '';
+
+    /**
      * @var Category[]
      */
     public $categories = [];
