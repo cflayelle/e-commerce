@@ -1,16 +1,19 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Hello CategoryController!{% endblock %}
+{% block title %}Category{% endblock %}
 
 {% block body %}
 <div class="container section">
-
-    <div style="display: block; margin-top: 7%;">
-            <div  class="row">
-            {% include "product/_products.html.twig" %}
-            </div>
-        
+    <h1 class="mt-10 text-center text-uppercase">Livres de catégorie : {{category}}</h1>
+    <div class="mt-5 mb-5 d-flex justify-content-between">
+        <div>{{products | length}} Products</div>
+        <div>
+            <a href="#" class="btnc btnc-light ">Trier</a>
+            <a href="#" class="btnc btnc-light ">Filtrer</a>
+        </div>
+    </div>
+    <div class="products-container">
+        {{ include('product/_products.html.twig') }}
     </div>
 </div>
-
 {% endblock %}
