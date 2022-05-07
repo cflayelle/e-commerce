@@ -26,7 +26,7 @@ class ProductController extends AbstractController
      */
 	public function workWithOrder(ProductRepository $productRepository,$page=1){
 		// Get the first page of orders
-        $pageSize = 6;
+        $pageSize = 5;
         if($page < 1){
             $page = 1;
         }
@@ -34,7 +34,7 @@ class ProductController extends AbstractController
         
 		$totalProducts = count($paginatedResult);
         $maxPages = ceil($totalProducts / $pageSize);
-        if($page=$maxPages){
+        if($page > $maxPages){
             $page=$maxPages;
         }
 
