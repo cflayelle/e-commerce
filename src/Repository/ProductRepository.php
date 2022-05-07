@@ -2,6 +2,7 @@
 
 namespace App\Repository;
 
+use App\Data\SearchData;
 use App\Entity\Product;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\ORM\OptimisticLockException;
@@ -71,7 +72,7 @@ class ProductRepository extends ServiceEntityRepository
 	 * @param $page
 	 * @return Paginator
 	 */
-	public function getProductsAvailable($page,$pageSize=10){
+	public function getProductsAvailable($page = 1,$pageSize=10){
 		$firstResult = ($page - 1) * $pageSize;
 
 		$queryBuilder = $this->getProductsAvailableQueryBuilder();
@@ -87,6 +88,47 @@ class ProductRepository extends ServiceEntityRepository
 		$paginator = new Paginator($query, true);
 		return $paginator;
 	}
+
+    public function findSearch(SearchData $search,$page=1,$pageSize=10): Paginator
+    {
+
+        $query = $this
+            ->createQueryBuilder('p')
+            ->select('c', 'p')
+            ->join('p.categories', 'c');
+
+        if (!empty($search->qName)) {
+            $query = $query
+                ->andWhere('p.name LIKE :qName')
+                ->setParameter('qName', "%{$search->qName}%");
+        }
+
+        if (!empty($search->min)) {
+            $query = $query
+                ->andWhere('p.price >= :min')
+                ->setParameter('min', $search->min);
+        }
+
+        if (!empty($search->max)) {
+            $query = $query
+                ->andWhere('p.price <= :max')
+                ->setParameter('max', $search->max);
+        }
+
+        if (!empty($search->categories)) {
+            $query = $query
+                ->andWhere('c.id IN (:categories)')
+                ->setParameter('categories', $search->categories);
+        }
+        $firstResult = ($page - 1) * $pageSize;
+        $query->setFirstResult($firstResult);
+		$query->setMaxResults($pageSize);
+
+        $query = $query->getQuery();
+
+        $paginator = new Paginator($query, true);
+		return $paginator;
+    }
 
 
     // /**

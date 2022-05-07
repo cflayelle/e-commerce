@@ -2,49 +2,47 @@
 
 namespace App\Controller;
 
+use App\Data\SearchData;
 use App\Entity\Category;
 use App\Entity\Product;
+use App\Form\SearchType;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use App\Repository\ProductRepository;
+use Symfony\Component\HttpFoundation\Request;
 
 class ProductController extends AbstractController
 {
-  
-    public function index(ProductRepository $productRepository): Response
-    {
-        $products = $productRepository->findProductsAvailable();
-
-        return $this->render('product/index.html.twig', [
-            'products' => $products
-        ]);
-    }
-
-    /**
+     /**
      * @Route("/produits/{page}", name="product")
      */
-	public function workWithOrder(ProductRepository $productRepository,$page=1){
-		// Get the first page of orders
+    public function index(ProductRepository $repository, Request $request,$page=1)
+    {
         $pageSize = 8;
         if($page < 1){
             $page = 1;
         }
-		$paginatedResult = $productRepository->getProductsAvailable($page,$pageSize);
+        $data = new SearchData();
         
-		$totalProducts = count($paginatedResult);
+        $form = $this->createForm(SearchType::class, $data);
+        $form->handleRequest($request);
+        $products = $repository->findSearch($data,$page,$pageSize);
+
+        $totalProducts = count($products);
         $maxPages = ceil($totalProducts / $pageSize);
         if($page > $maxPages){
             $page=$maxPages;
         }
 
         return $this->render('product/index.html.twig', [
-            'products' => $paginatedResult,
+            'products' => $products,
+            'form' => $form->createView(),
             'totalProducts' => $totalProducts,
             'currentPage' => $page,
             "maxPages"=>$maxPages
         ]);
-	}
+    }
     
     /**
      * @Route("/produit/{id}", name="show_product")
