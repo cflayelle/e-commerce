@@ -155,7 +155,7 @@ a:hover{
 }
 
 .btnc-primary:hover{
-    background-color: hsl(24, 79%, 26%);
+    background-color: rgb(119, 56, 14);
     color: #ffffff
 }
 
@@ -435,5 +435,26 @@ a.btn.btn-success.d-flex.align-items-center.justify-content-center:hover {
     gap: 10px;
 }
 
-
-
+.page-link {
+   
+    color: var(--primary);
+    border: 1px solid var(--primary);
+  }
+  .page-item.disabled .page-link {
+    color: #868e96;
+    pointer-events: none;
+    cursor: auto;
+    border-color: #718393;
+  }
+  .page-item.active .page-link {
+    z-index: 1;
+    color: #fff;
+    background-color: var(--primary);
+    border-color: var(--primary);
+  }
+  .page-link:focus, .page-link:hover {
+    color: #fff;
+    text-decoration: none;
+    background-color: rgb(137, 65, 17);
+    border-color: var(--primary);
+  }

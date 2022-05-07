@@ -11,9 +11,7 @@ use App\Repository\ProductRepository;
 
 class ProductController extends AbstractController
 {
-    /**
-     * @Route("/produits", name="product")
-     */
+  
     public function index(ProductRepository $productRepository): Response
     {
         $products = $productRepository->findProductsAvailable();
@@ -22,6 +20,31 @@ class ProductController extends AbstractController
             'products' => $products
         ]);
     }
+
+    /**
+     * @Route("/produits/{page}", name="product")
+     */
+	public function workWithOrder(ProductRepository $productRepository,$page=1){
+		// Get the first page of orders
+        $pageSize = 8;
+        if($page < 1){
+            $page = 1;
+        }
+		$paginatedResult = $productRepository->getProductsAvailable($page,$pageSize);
+        
+		$totalProducts = count($paginatedResult);
+        $maxPages = ceil($totalProducts / $pageSize);
+        if($page > $maxPages){
+            $page=$maxPages;
+        }
+
+        return $this->render('product/index.html.twig', [
+            'products' => $paginatedResult,
+            'totalProducts' => $totalProducts,
+            'currentPage' => $page,
+            "maxPages"=>$maxPages
+        ]);
+	}
     
     /**
      * @Route("/produit/{id}", name="show_product")
