@@ -26,7 +26,7 @@ class ProductController extends AbstractController
      */
 	public function workWithOrder(ProductRepository $productRepository,$page=1){
 		// Get the first page of orders
-        $pageSize = 5;
+        $pageSize = 8;
         if($page < 1){
             $page = 1;
         }
