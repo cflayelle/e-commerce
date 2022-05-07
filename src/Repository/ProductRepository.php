@@ -6,6 +6,8 @@ use App\Entity\Product;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\ORM\OptimisticLockException;
 use Doctrine\ORM\ORMException;
+use Doctrine\ORM\QueryBuilder;
+use Doctrine\ORM\Tools\Pagination\Paginator;
 use Doctrine\Persistence\ManagerRegistry;
 
 /**
@@ -52,6 +54,39 @@ class ProductRepository extends ServiceEntityRepository
                     ->getResult()
         ;
     }
+
+    /**
+     * @return QueryBuilder
+     */
+    public function getProductsAvailableQueryBuilder(): QueryBuilder{
+        return $this->createQueryBuilder('p')
+                    ->andWhere('p.stock > 0')
+                    // ->getQuery()
+                    // ->getResult()
+        ;
+    }
+
+    /**
+	 * Retrieve the list of active orders with all their actives packages
+	 * @param $page
+	 * @return Paginator
+	 */
+	public function getProductsAvailable($page,$pageSize=10){
+		$firstResult = ($page - 1) * $pageSize;
+
+		$queryBuilder = $this->getProductsAvailableQueryBuilder();
+		
+		// Set the returned page
+		$queryBuilder->setFirstResult($firstResult);
+		$queryBuilder->setMaxResults($pageSize);
+		
+		// Generate the Query
+		$query = $queryBuilder->getQuery();
+		
+		// Generate the Paginator
+		$paginator = new Paginator($query, true);
+		return $paginator;
+	}
 
 
     // /**

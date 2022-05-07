@@ -12,6 +12,32 @@
             <a href="#" class="btnc btnc-light ">Filtrer</a>
         </div>
     </div>
+    <div class="mb-5">
+        {% if maxPages > 1 %}
+        <ul class="pagination pagination-sm">
+            {# `«` arrow #}
+            <li {{ currentPage==1 ? 'class="disabled"' }}>
+                <a href="{{ path('product', {page: currentPage-1 < 1 ? 1 : currentPage-1}) }}">«</a>
+            </li>
+
+            {# Render each page number #}
+            {% for i in 1..maxPages %}
+            <li {{ currentPage==i ? 'class="active"' }}>
+                <a href="{{ path('product', {page: i}) }}">{{ i }}</a>
+            </li>
+            {% endfor %}
+
+            {# `»` arrow #}
+            <li {{ currentPage==maxPages ? 'class="disabled"' }}>
+                <a href="{{ path('product', {page: currentPage+1 <= maxPages ? currentPage+1 : currentPage}) }}">»</a>
+            </li>
+        </ul>
+        {% endif %}
+        {{totalProducts}}
+        <a href="{{ path('product', {page: currentPage - 1}) }}" class="btnc btnc-light ">Précédent</a>
+        <a href="{{ path('product', {page: 1}) }}">{{ 2 }}</a>
+        <a href="{{ path('product', {page: currentPage + 1}) }}" class="btnc btnc-light ">Suivant</a>
+    </div>
     <div class="products-container">
         {{ include('product/_products.html.twig') }}
     </div>
