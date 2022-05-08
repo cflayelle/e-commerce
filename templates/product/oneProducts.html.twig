@@ -75,11 +75,16 @@
 
             <div class="d-flex comment flex-column align-items-start col-sm-7 ">
                 {% for comment in comments %}
-                <div class="mb-25">
+                <div class="mb-5">
                     <h1>{{ comment.title }}</h1>
-                    <div class="d-flex align-items-center mt-3 mb-2">
-                        <img src="{{ asset('/images/utils/stars.png') }}" class="mr-2" alt="stars" width="120">
-                        {{comment.rate}}
+                    <div>
+                        {% for i in 1..5 %}
+                            {% if i <= comment.rate %}
+                                <i class="bi bi-star-fill"></i>
+                            {% else %}
+                                <i class="bi bi-star"></i>
+                            {% endif %}
+                        {% endfor %}
                     </div>
                     <p>
                         {{comment.content}}
@@ -90,44 +95,6 @@
                 </div>
                 {% endfor %}
             </div>
-
-{# 
-            <div class="d-flex comment flex-column align-items-start col-sm-7 ">
-                <div class="mb-5">
-                    <h1>“Excellent je recommande”</h1>
-                    <div class="d-flex align-items-center mt-3 mb-2">
-                        <img src="{{ asset('/images/utils/stars.png') }}" class="mr-2" alt="stars" width="120">
-                    </div>
-                    <p>
-                        Il suffit de lire quelques pages pour ne plus pouvoir s'arrêter... Une ambiance très british
-                        comme on les aime ! Le puzzle de l'histoire est construit sur un triangle : d'un côté une mère
-                        de famille quarantenaire et bohème un peu empêtrée dans ses problèmes familiaux et amoureux, de
-                        l'autre une jeune traductrice ukrainienne fraichement débarquée sur le sol anglais après avoir
-                        épousé un homme qui vient subitement de disparaitre alors qu'il semblait très épris d'elle, et
-                        au milieu un homme échoué sur une plage totalement amnésique sous la pluie et sous les fenêtres
-                        de notre mère de famille chez qui il ne va pas tarder à trouver refuge... Après, à vous de
-                        voir.... ! moi j'ai beaucoup aimé !
-                    </p>
-                    <span class="auteur"><b>Paul G</b></span>
-                </div>
-                <div class="mb-5">
-                    <h1>“Pas mal sans plus”</h1>
-                    <div class="d-flex align-items-center mt-3 mb-2">
-                        <img src="{{ asset('/images/utils/stars.png') }}" class="mr-2" alt="stars" width="120">
-                    </div>
-                    <p>
-                        Il suffit de lire quelques pages pour ne plus pouvoir s'arrêter... Une ambiance très british
-                        comme on les aime ! Le puzzle de l'histoire est construit sur un triangle : d'un côté une mère
-                        de famille quarantenaire et bohème un peu empêtrée dans ses problèmes familiaux et amoureux, de
-                        l'autre une jeune traductrice ukrainienne fraichement débarquée sur le sol anglais après avoir
-                        épousé un homme qui vient subitement de disparaitre alors qu'il semblait très épris d'elle, et
-                        au milieu un homme échoué sur une plage totalement amnésique sous la pluie et sous les fenêtres
-                        de notre mère de famille chez qui il ne va pas tarder à trouver refuge... Après, à vous de
-                        voir.... ! moi j'ai beaucoup aimé !
-                    </p>
-                    <span class="auteur"><b>Sophie</b></span>
-                </div>
-            </div> #}
         </div>
     </div>
 </div>
