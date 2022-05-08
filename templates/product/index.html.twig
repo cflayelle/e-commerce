@@ -2,14 +2,18 @@
 
 {% block title %}Produits{% endblock %}
 
+{% form_theme form 'bootstrap_4_layout.html.twig' %}
+
 {% block body %}
 <div class="container section">
     <h1 class="mt-10 text-center text-uppercase">Tous les livres</h1>
     <div class="mt-5 mb-5 d-flex justify-content-between">
         <div>{{products | length}} Livres</div>
-        <div>
-            <a href="#" class="btnc btnc-light ">Trier</a>
-            <a href="#" class="btnc btnc-light ">Filtrer</a>
+        <div class="d-flex">
+            <a href="#" class="btnc btnc-light mr-2">Trier</a>
+            <div class="btnc btnc-light " id="btn-product-filter">
+                Filtrer
+            </div>
         </div>
     </div>
     <div class="products-container">
@@ -29,11 +33,39 @@
                 </li>
                 {% endfor %}
                 <li class="page-item {{currentPage >= maxPages ? 'disabled':'' }}">
-                    <a class="page-link" href="{{ path('product', {page: currentPage+1 <= maxPages ? currentPage+1 : currentPage}) }}">Suivant</a>
+                    <a class="page-link"
+                        href="{{ path('product', {page: currentPage+1 <= maxPages ? currentPage+1 : currentPage}) }}">Suivant</a>
                 </li>
             </ul>
         </nav>
         {% endif %}
+    </div>
+    <div class="" id="nav-product-filter">
+        <div class="nav-close mb-4">
+            &#x2715
+        </div>
+        {{ form_start(form) }}
+
+        <div>
+            {{ form_row(form.qName, {attr: {placeholder: 'Nom du livre'}}) }}
+        </div>
+        <div>
+            {{ form_row(form.qDescription, {attr: {placeholder: 'Description du livre'}}) }}
+        </div>
+        <div>
+            {{ form_row(form.min) }}
+        </div>
+        <div>
+            {{ form_row(form.max) }}
+        </div>
+        <div>
+            Catégories :
+            <div class="ml-3 mt-1">
+                {{ form_row(form.categories) }}
+            </div>
+        </div>
+        <button type="submit" class="btnc btnc-light mt-5 w-100">Filtrer</button>
+        {{ form_end(form) }}
     </div>
 </div>
 {% endblock %}

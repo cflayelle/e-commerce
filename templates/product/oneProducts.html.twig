@@ -2,6 +2,8 @@
 
 {% block title %}Products{% endblock %}
 
+{% form_theme form 'bootstrap_4_layout.html.twig' %}
+
 {% block body %}
 
 <div class="section container one-product pt-5">
@@ -47,10 +49,39 @@
                     <img src="{{ asset('/images/utils/stars.png') }}" class="mr-2" alt="stars" width="120"> 4,9 sur 5
                 </div>
                 <span>12 évaluations</span>
-                <div class="mt-5">
+                {# <div class="mt-5">
                     <a href="#" class="btnc btnc-light ">Trier par : le plus récent</a>
-                </div>
+                </div> #}
+                 {% if app.user %}
+                <h1 class="mt-5">Ajouter un commentaire</h1>
+                {{ form_start(form) }}
+                    {{form_row(form.rate)}}
+                    {{form_row(form.title)}}
+                    {{form_row(form.content)}}
+                    <button type="submit" class="btnc btnc-light mb-5">Commenter</button>
+                {{ form_end(form) }}
+                {% endif %}
             </div>
+
+            <div class="d-flex comment flex-column align-items-start col-sm-7 ">
+                {% for comment in comments %}
+                <div class="mb-5">
+                    <h1>{{ comment.title }}</h1>
+                    <div class="d-flex align-items-center mt-3 mb-2">
+                        <img src="{{ asset('/images/utils/stars.png') }}" class="mr-2" alt="stars" width="120">
+                        {{comment.rate}}
+                    </div>
+                    <p>
+                        {{comment.content}}
+                    </p>
+                    <span class="auteur">
+                        <b>{{comment.author.firstName[:1]}}***{{comment.author.firstName[-1:]}}</b>
+                    </span>
+                </div>
+                {% endfor %}
+            </div>
+
+{# 
             <div class="d-flex comment flex-column align-items-start col-sm-7 ">
                 <div class="mb-5">
                     <h1>“Excellent je recommande”</h1>
@@ -86,7 +117,7 @@
                     </p>
                     <span class="auteur"><b>Sophie</b></span>
                 </div>
-            </div>
+            </div> #}
         </div>
     </div>
 </div>
