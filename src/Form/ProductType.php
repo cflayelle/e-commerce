@@ -24,7 +24,9 @@ class ProductType extends AbstractType
                 'class'=> Category::class,
                 'multiple'=>true,
             ])
-            ->add('imageFile', VichImageType::class)
+            ->add('imageFile', VichImageType::class,[
+                'required' => false
+            ])
         ;
     }
 
@@ -34,4 +36,5 @@ class ProductType extends AbstractType
             'data_class' => Product::class,
         ]);
     }
+    
 }
