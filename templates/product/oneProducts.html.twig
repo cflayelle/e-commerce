@@ -26,9 +26,26 @@
                 <div class="my-3 flex-center justify-content-between w-100">
                     <div class="text-lg text-bold">{{product.price}} €</div>
                     <a href="#comments" class="rates">
-                        <div class="flex-center">
-                            <img src="{{ asset('/images/utils/stars.png') }}" class="mr-2" alt="stars" width="120">
-                            <span>12 évaluations</span>
+                        <div class="flex-center rate-avg">
+                            <div>
+                                {% for i in 1..5 %}
+                                    {% if i < rateAvg %}
+                                        <i class="bi bi-star-fill"></i>
+                                    {% elseif  i >= rateAvg and i < rateAvg + 1 %}
+                                        <i class="bi bi-star-fill active"
+                                            style="--rating:{{ ( rateAvg + 1 - i) }}"
+                                        ></i>
+                                    {% else %}
+                                        <i class="bi bi-star" style="color:red"></i>
+                                    {% endif %}
+                                {% endfor %}
+                            </div>
+                            <div class="border-star">
+                                {% for i in 1..5 %}
+                                    <i class="bi bi-star"></i>
+                                {% endfor %}
+                            </div>
+                            <span class="mt-1">{{ rateTotal }} évaluation{{rateTotal > 1 ?'s':''}}</span>
                         </div>
                     </a>
                 </div>
@@ -49,10 +66,27 @@
         <div class="d-flex justify-content-between">
             <div>
                 <h1>Commentaires Clients</h1>
-                <div class="d-flex align-items-center mt-3 mb-2">
-                    <img src="{{ asset('/images/utils/stars.png') }}" class="mr-2" alt="stars" width="120"> 4,9 sur 5
+                 <div class="rate-avg">
+                    <div class="stars">
+                        {% for i in 1..5 %}
+                            {% if i < rateAvg %}
+                                <i class="bi bi-star-fill"></i>
+                            {% elseif  i >= rateAvg and i < rateAvg + 1 %}
+                                <i class="bi bi-star-fill active"
+                                    style="--rating:{{ ( rateAvg + 1 - i) }}"
+                                ></i>
+                            {% else %}
+                                <i class="bi bi-star"></i>
+                            {% endif %}
+                        {% endfor %}
+                    </div>
+                    <div class="border-star">
+                        {% for i in 1..5 %}
+                            <i class="bi bi-star"></i>
+                        {% endfor %}
+                    </div>
+                    <span class="mt-1">{{ rateTotal }} évaluation{{rateTotal > 1 ?'s':''}}</span>
                 </div>
-                <span>12 évaluations</span>
                 {# <div class="mt-5">
                     <a href="#" class="btnc btnc-light ">Trier par : le plus récent</a>
                 </div> #}

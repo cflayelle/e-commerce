@@ -5,6 +5,7 @@
     --light: #FFE69B;
     --warning: #FAB303;
     --danger: #E50101;
+    --star : #FAB303;
 }
 
 html{
@@ -193,20 +194,22 @@ a:hover{
 .card-text {
     color: var(--primary);
 }
-/* .btnc-success {
+.btnc-success {
     background-color: var(--primary);
     color: var(--primary);
 }
 
-/* .btnc-success:hover{
-    color: var(--light);
-    background-color: var(--light);
-} */
+.btnc-success {
+    background-color: #A7FF92;
+    color: #273F21;
+}
 
 .btnc-success:hover{
-    color: var(--light);
-    background-color: var(--light);
-} */
+    color: #273F21;
+    background-color: hsl(109, 100%, 67%);
+}
+
+
 a.btn.btn-success.d-flex.align-items-center.justify-content-center {
     background-color: var(--primary);
     border-color: var(--primary);
@@ -495,12 +498,34 @@ a.btn.btn-success.d-flex.align-items-center.justify-content-center:hover {
     cursor: pointer;
 }
 
+
 .bi-star,.bi-star-fill {
     font-size: 20px;
     margin-right: 4px;
-    color: #FAB303;
+    color: #FAB303; 
 }
 
 .-mtc-25{
     margin-top: -25px;
+}
+
+.rate-avg .bi-star-fill.active{
+    --percent: calc(var(--rating) * 100%);
+    background: linear-gradient(90deg, var(--star) var(--percent),#ffffff  var(--percent));
+    /* background: linear-gradient(90deg, var(--star) calc(2.5/5 * 100%), #ffffff 0%); */
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+}
+
+.rate-avg{
+    position:relative;
+}
+.rate-avg .star{
+    cursor: default;
+}
+.rate-avg .border-star{
+    position:absolute;
+    top: 0;
+    left: 0;
 }
