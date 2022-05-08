@@ -47,6 +47,37 @@ class ProductController extends AbstractController
             "maxPages"=>$maxPages
         ]);
     }
+
+    /**
+     * @Route("/navbar", name="navbar")
+     */
+    public function navbar(ProductRepository $repository,Request $request,$page=1)
+    {
+
+        $pageSize = 8;
+        if($page < 1){
+            $page = 1;
+        }
+        $data = new SearchData();
+        
+        $form = $this->createForm(SearchType::class, $data);
+        $form->handleRequest($request);
+        $products = $repository->findSearch($data,$page,$pageSize);
+
+        $totalProducts = count($products);
+        $maxPages = ceil($totalProducts / $pageSize);
+        if($page > $maxPages){
+            $page=$maxPages;
+        }
+        if ($form->isSubmitted() && $form->isValid()) {
+            return $this->redirectToRoute("product",[
+                'page' => 1,
+            ]);
+        }
+        return $this->render('_navbar.html.twig', [
+            'form' => $form->createView(),
+        ]);
+    }
     
     /**
      * @Route("/produit/{id}", name="show_product")

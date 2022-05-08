@@ -134,6 +134,19 @@ a:hover{
     cursor: pointer;
 }
 
+.btn-search{
+    border: none;
+    text-decoration: none;
+    color:#ffffff;
+    cursor: pointer;
+    background: none;
+}
+
+.btn-search:focus{
+    outline: none;
+    box-shadow: none;
+}
+
 .btnc:hover{
     color: inherit;
 }
@@ -528,4 +541,9 @@ a.btn.btn-success.d-flex.align-items-center.justify-content-center:hover {
     position:absolute;
     top: 0;
     left: 0;
+}
+
+.btn:focus, .btnc:focus,input:focus{
+    outline: none;
+    box-shadow: none;
 }

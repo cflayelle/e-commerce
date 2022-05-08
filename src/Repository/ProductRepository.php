@@ -89,7 +89,7 @@ class ProductRepository extends ServiceEntityRepository
 		return $paginator;
 	}
 
-    public function findSearch(SearchData $search,$page=1,$pageSize=10): Paginator
+    public function findSearch(SearchData $search,$page=1,$pageSize=8): Paginator
     {
 
         $query = $this
