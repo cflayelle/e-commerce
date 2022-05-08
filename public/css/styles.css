@@ -436,4 +436,9 @@ a.btn.btn-success.d-flex.align-items-center.justify-content-center:hover {
 }
 
 
+@media screen and (min-width: 980px) {
+    .centre{
+      width: 70%;
+    }
 
+  }
