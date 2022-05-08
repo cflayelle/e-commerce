@@ -4,12 +4,16 @@ namespace App\Controller;
 
 use App\Data\SearchData;
 use App\Entity\Category;
+use App\Entity\Comment;
 use App\Entity\Product;
+use App\Form\CommentType;
 use App\Form\SearchType;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use App\Repository\ProductRepository;
+use DateTime;
+use Doctrine\Persistence\ObjectManager;
 use Symfony\Component\HttpFoundation\Request;
 
 class ProductController extends AbstractController
@@ -47,10 +51,26 @@ class ProductController extends AbstractController
     /**
      * @Route("/produit/{id}", name="show_product")
      */
-    public function oneProduct(Product $product): Response
+    public function oneProduct(Product $product,ObjectManager $manager, Request $request): Response
     {
+        $comment = new Comment();
+        $form = $this->createForm(CommentType::class, $comment);
+        $form->handleRequest($request);
+        if($form->isSubmitted() && $form->isValid() && $this->getUser()){
+            $comment->setCreatedAt(new DateTime())
+                    ->setProduct($product)
+                    ->setAuthor($this->getUser())
+                    ;
+            $manager->persist($comment);
+            $manager->flush();
+            
+            $this->addFlash('success', 'Votre commentaire a bien été ajouté');
+        }
+        $comments = $product->getComments();
         return $this->render('product/oneProducts.html.twig', [
-            'product' => $product
+            'product' => $product,
+            'form'=> $form->createView(),
+            'comments'=>$comments
         ]);
     }
 
