@@ -29,11 +29,11 @@
                         <div class="flex-center rate-avg">
                             <div>
                                 {% for i in 1..5 %}
-                                    {% if i < rateAvg %}
+                                    {% if i < product.rateAvg %}
                                         <i class="bi bi-star-fill"></i>
-                                    {% elseif  i >= rateAvg and i < rateAvg + 1 %}
+                                    {% elseif  i >= product.rateAvg and i < product.rateAvg + 1 %}
                                         <i class="bi bi-star-fill active"
-                                            style="--rating:{{ ( rateAvg + 1 - i) }}"
+                                            style="--rating:{{ ( product.rateAvg + 1 - i) }}"
                                         ></i>
                                     {% else %}
                                         <i class="bi bi-star" style="color:red"></i>
@@ -45,7 +45,7 @@
                                     <i class="bi bi-star"></i>
                                 {% endfor %}
                             </div>
-                            <span class="mt-1">{{ rateTotal }} évaluation{{rateTotal > 1 ?'s':''}}</span>
+                            <span class="mt-1">{{ comments | length }} évaluation{{comments | length > 1 ?'s':''}}</span>
                         </div>
                     </a>
                 </div>
@@ -66,26 +66,27 @@
         <div class="d-flex justify-content-between">
             <div>
                 <h1>Commentaires Clients</h1>
-                 <div class="rate-avg">
+                <div class="rate-avg">
                     <div class="stars">
                         {% for i in 1..5 %}
-                            {% if i < rateAvg %}
+                            {% if i < product.rateAvg %}
                                 <i class="bi bi-star-fill"></i>
-                            {% elseif  i >= rateAvg and i < rateAvg + 1 %}
+                            {% elseif  i >= product.rateAvg and i < product.rateAvg + 1 %}
                                 <i class="bi bi-star-fill active"
-                                    style="--rating:{{ ( rateAvg + 1 - i) }}"
+                                    style="--rating:{{ ( product.rateAvg + 1 - i) }}"
                                 ></i>
                             {% else %}
                                 <i class="bi bi-star"></i>
                             {% endif %}
                         {% endfor %}
+                        {{ product.rateAvg|round(1, 'floor') }} sur 5
                     </div>
                     <div class="border-star">
                         {% for i in 1..5 %}
                             <i class="bi bi-star"></i>
                         {% endfor %}
                     </div>
-                    <span class="mt-1">{{ rateTotal }} évaluation{{rateTotal > 1 ?'s':''}}</span>
+                    <span class="mt-1">{{ comments | length }} évaluation{{comments | length > 1 ?'s':''}}</span>
                 </div>
                 {# <div class="mt-5">
                     <a href="#" class="btnc btnc-light ">Trier par : le plus récent</a>

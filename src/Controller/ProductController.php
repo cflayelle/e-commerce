@@ -67,22 +67,11 @@ class ProductController extends AbstractController
             $this->addFlash('success', 'Votre commentaire a bien été ajouté');
         }
         $comments = $product->getComments();
-        $rateTotal = count($comments);
-        $rates = 0;
-        $rateAvg = 0;
-        foreach($comments as $com){
-            $rates+= $com->getRate();
-        }
-        if($rateTotal > 0){
-            $rateAvg = $rates/$rateTotal;
-        }
         
         return $this->render('product/oneProducts.html.twig', [
             'product' => $product,
             'form'=> $form->createView(),
             'comments'=>$comments,
-            'rateTotal'=> $rateTotal,
-            'rateAvg'=>$rateAvg
         ]);
     }
 

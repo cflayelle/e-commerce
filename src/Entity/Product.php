@@ -240,4 +240,20 @@ class Product
 
         return $this;
     }
+
+    public function getRateAvg():float
+    {
+        $totalRates = count($this->getComments());
+        $rates = 0;
+        $rateAvg = 0;
+
+        foreach($this->getComments() as $com){
+            $rates+= $com->getRate();
+        }
+        if($totalRates > 0){
+            $rateAvg = $rates/$totalRates;
+        }
+
+        return $rateAvg;
+    }
 }
