@@ -2,6 +2,10 @@
 
 {% block title %}Products{% endblock %}
 
+{% block javascripts %}
+    <script src="{{ asset('js/stars.js') }}" defer></script>
+{% endblock %}
+
 {% form_theme form 'bootstrap_4_layout.html.twig' %}
 
 {% block body %}
@@ -53,10 +57,16 @@
                     <a href="#" class="btnc btnc-light ">Trier par : le plus récent</a>
                 </div> #}
                  {% if app.user %}
-                <h1 class="mt-5">Ajouter un commentaire</h1>
+                <h1 class="mt-5 mb-3">Ajouter un commentaire</h1>
                 {{ form_start(form) }}
-                    {{form_row(form.rate)}}
-                    {{form_row(form.title)}}
+                    <p class="mb-1">Ajouter une note</p>
+                    <div class="rate-form">
+                        <i class="bi bi-star" data-value="1"></i><i class="bi bi-star" data-value="2"></i><i class="bi bi-star" data-value="3"></i><i class="bi bi-star" data-value="4"></i><i class="bi bi-star" data-value="5"></i>
+                    </div>
+                    {{form_row(form.rate, { 'id' : 'input-rate'})}}
+                    <div class="-mtc-25">
+                        {{form_row(form.title)}}
+                    </div>
                     {{form_row(form.content)}}
                     <button type="submit" class="btnc btnc-light mb-5">Commenter</button>
                 {{ form_end(form) }}
@@ -65,7 +75,7 @@
 
             <div class="d-flex comment flex-column align-items-start col-sm-7 ">
                 {% for comment in comments %}
-                <div class="mb-5">
+                <div class="mb-25">
                     <h1>{{ comment.title }}</h1>
                     <div class="d-flex align-items-center mt-3 mb-2">
                         <img src="{{ asset('/images/utils/stars.png') }}" class="mr-2" alt="stars" width="120">

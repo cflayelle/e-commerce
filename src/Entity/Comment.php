@@ -4,6 +4,8 @@ namespace App\Entity;
 
 use App\Repository\CommentRepository;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
+
 
 #[ORM\Entity(repositoryClass: CommentRepository::class)]
 class Comment
@@ -17,6 +19,8 @@ class Comment
     private $title;
 
     #[ORM\Column(type: 'integer')]
+    #[Assert\GreaterThan(0,null,"Veuillez mettre une note")]
+    #[Assert\LessThan(6,null,"Veuillez mettre une note inférieur ou égale à 5")]
     private $rate;
 
     #[ORM\Column(type: 'text')]

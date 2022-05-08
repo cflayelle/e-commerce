@@ -22,7 +22,11 @@ class CommentType extends AbstractType
                 ]
             ])
             ->add('rate',IntegerType::class,[
-                'label'=>"Noter"
+                'label'=>" ",
+                'attr'=> [
+                    'value'=>0,
+                    'class'=>'d-none',
+                ]
             ])
             ->add('content', TextareaType::class,[
                 'label'=>"Ajouter un commentaire",

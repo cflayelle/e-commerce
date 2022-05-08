@@ -491,3 +491,14 @@ a.btn.btn-success.d-flex.align-items-center.justify-content-center:hover {
     font-weight: bold;
 }
 
+.rate-form{
+    cursor: pointer;
+}
+
+.rate-form .bi-star,.rate-form .bi-star-fill {
+    font-size: 20px;
+    margin-right: 4px;
+}
+.-mtc-25{
+    margin-top: -25px;
+}
