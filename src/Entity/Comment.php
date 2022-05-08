@@ -15,7 +15,7 @@ class Comment
     #[ORM\Column(type: 'integer')]
     private $id;
 
-    #[ORM\Column(type: 'string', length: 255)]
+    #[ORM\Column(type: 'string', length: 255, nullable: true)]
     private $title;
 
     #[ORM\Column(type: 'integer')]
@@ -23,7 +23,7 @@ class Comment
     #[Assert\LessThan(6,null,"Veuillez mettre une note inférieur ou égale à 5")]
     private $rate;
 
-    #[ORM\Column(type: 'text')]
+    #[ORM\Column(type: 'text', nullable: true)]
     private $content;
 
     #[ORM\ManyToOne(targetEntity: User::class, inversedBy: 'comments')]

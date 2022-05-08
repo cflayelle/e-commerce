@@ -17,6 +17,7 @@ class CommentType extends AbstractType
         $builder
             ->add('title',TextType::class,[
                 'label'=>"Ajouter un titre",
+                'required' => false,
                 'attr'=> [
                     'placeholder'=>'Le plus important à savoir'
                 ]
@@ -30,6 +31,7 @@ class CommentType extends AbstractType
             ])
             ->add('content', TextareaType::class,[
                 'label'=>"Ajouter un commentaire",
+                'required' => false,
                 'attr'=> [
                     'placeholder'=>"Dites-en plus, qu'est-ce que vous avez aimé ou n'avez pas aimé ?"
                 ]
