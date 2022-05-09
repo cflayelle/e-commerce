@@ -28,6 +28,7 @@ class PurchaseController extends AbstractController
         ]);
     }
 
+
     #[Route('/purchase/pay', name: 'app_purchase_pay')]
     public function pay(ObjectManager $manager, StatusRepository $statusRepository): Response
     {
@@ -68,6 +69,8 @@ class PurchaseController extends AbstractController
             }
             $purchase->setStatus($status);
 
+            $manager->persist($purchase);
+
             $newCurrentCart = new Cart();
             $newCurrentCart->setCreatedAt(new DateTime());
             $newCurrentCart->setUser($this->getUser());
@@ -75,7 +78,7 @@ class PurchaseController extends AbstractController
 
             $manager->persist($newCurrentCart);
 
-            $manager->persist($purchase);
+            
             $manager->flush();
 
             $this->addFlash('success', 'Votre commande a bien été effectuée');
@@ -83,7 +86,8 @@ class PurchaseController extends AbstractController
             $manager->getConnection()->commit();
         } catch (Exception $e) {
             $manager->getConnection()->rollBack();
-            throw $e;
+            return $this->redirectToRoute("product");
+            // throw $e;
         }
 
         return $this->redirectToRoute('app_cart');

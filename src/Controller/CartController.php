@@ -25,6 +25,16 @@ class CartController extends AbstractController
         $cart = $this->getUser()->getCurrentCart();
 
         $cartElements = $cart->getCartElements();
+        foreach($cartElements as $cartElement){
+            if($cartElement->getQuantity() > $cartElement->getProduct()->getStock()){
+                if($cartElement->getProduct()->getStock() > 0){
+                    $cartElement->setQuantity($cartElement->getProduct()->getStock());
+                }
+                else{
+                    $cart->removeCartElement($cartElement);
+                }
+            }
+        }
 
         // dd($cart);
         return $this->render('cart/index.html.twig', [
