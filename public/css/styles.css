@@ -134,6 +134,16 @@ a:hover{
     cursor: pointer;
 }
 
+.btnc-sm{
+    border: none;
+    text-decoration: none;
+    color: var(--primary);
+    transition : background-color .3s ease-in-out;
+    border-radius: 999px;
+    cursor: pointer;
+    padding: 10px 15px;
+}
+
 .btn-search{
     border: none;
     text-decoration: none;

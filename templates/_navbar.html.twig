@@ -43,8 +43,8 @@
                 </a>
                 {% if is_granted('IS_AUTHENTICATED_FULLY') %}
                 <div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownMenuLink">
-                  <a class="dropdown-item" href="{{ path('app_cart') }}">Panier</a>
-                  <a class="dropdown-item" href="{{ path('app_purchase') }}">Commande</a>
+                  <a class="dropdown-item" href="{{ path('app_cart') }}">Mon panier</a>
+                  <a class="dropdown-item" href="{{ path('app_purchase') }}">Mes commandes</a>
                   <a class="dropdown-item" href="{{ path('app_logout') }}">Déconnexion</a>
                 </div>
                 {% else %}

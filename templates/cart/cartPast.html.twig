@@ -1,0 +1,39 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello CartController!{% endblock %}
+
+{% block body %}
+
+<div class="container mt-10 mb-5">
+  <h1>Mon Panier</h1>
+  {% if cartElements | length %}
+  <div class="border rounded-10 mt-5 mb-3 px-3 pt-3">
+    <div class="row border-bottom pb-3">
+      <div class="col-6">Article(s)</div>
+      <div class="col">Prix</div>
+      <div class="col">Quantité</div>
+      <div class="col">Total</div>
+      <!-- <div class="col">Actions</div> -->
+    </div>
+    {% for cartElement in cartElements %}
+    <div class="row py-4">
+      <div class="col-6 d-flex">
+        <div class="mr-3">
+          <img src="{{ vich_uploader_asset(cartElement.product)}}" alt="" style="width: 116px; objectif-fit:contain">
+        </div>
+        <div>
+        {{cartElement.product.name}}
+        </div>
+      </div>
+      <div class="col">{{cartElement.product.price}}€</div>
+      <div class="col">
+        {{cartElement.quantity}}
+      </div>
+      <div class="col">{{cartElement.product.price * cartElement.quantity}}€</div>
+    </div>
+    {% endfor %}
+    </div>
+    {% endif %}
+</div>
+
+{% endblock %}

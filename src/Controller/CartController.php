@@ -2,6 +2,7 @@
 
 namespace App\Controller;
 
+use App\Entity\Cart;
 use App\Entity\CartElement;
 use App\Entity\Product;
 use App\Repository\CartElementRepository;
@@ -30,6 +31,20 @@ class CartController extends AbstractController
             'cartElements' => $cartElements,
         ]);
     }
+
+
+    #[Route('/commandes/{id}', name: 'cart_past')]
+    public function showCart(Cart $cart): Response
+    {
+        $this->denyAccessUnlessGranted('IS_AUTHENTICATED_FULLY');
+
+        $cartElements = $cart->getCartElements();
+
+        return $this->render('cart/cartPast.html.twig', [
+            'cartElements' => $cartElements,
+        ]);
+    }
+
     #[Route('/cart/add/{id}', name: 'app_cart_add')]
     public function add(Product $product, ObjectManager $manager): Response
     {

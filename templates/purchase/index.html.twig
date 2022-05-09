@@ -9,25 +9,24 @@
     {% if purchases | length %}
       <div class="border rounded-10 mt-5 mb-3 px-3 pt-3">
         <div class="row border-bottom pb-3">
-          <div class="col-6">Numéro de commandes</div>
+          <div class="col-5">Numéro de commandes</div>
           <div class="col">Statut</div>
           <div class="col">Quantité</div>
           <div class="col">Prix total</div>
           <div class="col">Date</div>
-          <div class="col">Actions</div>
+          <div class="col-2">Actions</div>
           <!-- <div class="col">Actions</div> -->
         </div>
         {% for purchase in purchases %}
           <div class="row py-4">
-            <div class="col-6">{{purchase.id}}</div>
+            <div class="col-5">{{purchase.id}}</div>
             <div class="col">{{purchase.status}}</div>
             <div class="col">{{ purchase.cart.quantityTotal }}</div>
             <div class="col">{{ purchase.cart.totalPrice }}€</div>
             <div class="col">{{ purchase.purchaseDate | date('d/m/Y')}}</div>
-            <div class="col">
-              <a href="#" class="btn btn-sm btn-outline-primary">Voir détail</a>
+            <div class="col-2">
+              <a href="{{path("cart_past",{id:purchase.cart.id})}}" class="btnc-sm btnc-light">Voir détail</a>
             </div>
-            <!-- <div class="col">Actions</div> -->
           </div>
         {% endfor %}
       {% else %}
