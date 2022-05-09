@@ -10,13 +10,30 @@ use Symfony\Component\Routing\Annotation\Route;
 
 class CategoryController extends AbstractController
 {
-    #[Route('/categories', name: 'app_category')]
-    public function index(CategoryRepository $categoryRepository): Response
+    #[Route('/categories/{page}', name: 'app_category')]
+    public function index(CategoryRepository $categoryRepository,$page=1): Response
     {
-        $categories = $categoryRepository->findAll();
+   
+        $pageSize = 10;
+
+        $categories = $categoryRepository->getAll($page,$pageSize);
+
+        if($page < 1){
+            $page = 1;
+        }
+
+        $totalList = count($categories);
+        $maxPages = ceil($totalList / $pageSize);
+        if($page > $maxPages){
+            $page=$maxPages;
+        }
 
         return $this->render('category/index.html.twig', [
-            "categories" => $categories
+            "categories" => $categories,
+            'totalList' => $totalList,
+            'currentPage' => $page,
+            "maxPages"=>$maxPages,
+            "pathName"=>"app_category"
         ]);
     }
 }

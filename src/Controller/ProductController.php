@@ -33,8 +33,8 @@ class ProductController extends AbstractController
         $form->handleRequest($request);
         $products = $repository->findSearch($data,$page,$pageSize);
 
-        $totalProducts = count($products);
-        $maxPages = ceil($totalProducts / $pageSize);
+        $totalList = count($products);
+        $maxPages = ceil($totalList / $pageSize);
         if($page > $maxPages){
             $page=$maxPages;
         }
@@ -42,40 +42,10 @@ class ProductController extends AbstractController
         return $this->render('product/index.html.twig', [
             'products' => $products,
             'form' => $form->createView(),
-            'totalProducts' => $totalProducts,
+            'totalList' => $totalList,
             'currentPage' => $page,
-            "maxPages"=>$maxPages
-        ]);
-    }
-
-    /**
-     * @Route("/navbar", name="navbar")
-     */
-    public function navbar(ProductRepository $repository,Request $request,$page=1)
-    {
-
-        $pageSize = 8;
-        if($page < 1){
-            $page = 1;
-        }
-        $data = new SearchData();
-        
-        $form = $this->createForm(SearchType::class, $data);
-        $form->handleRequest($request);
-        $products = $repository->findSearch($data,$page,$pageSize);
-
-        $totalProducts = count($products);
-        $maxPages = ceil($totalProducts / $pageSize);
-        if($page > $maxPages){
-            $page=$maxPages;
-        }
-        if ($form->isSubmitted() && $form->isValid()) {
-            return $this->redirectToRoute("product",[
-                'page' => 1,
-            ]);
-        }
-        return $this->render('_navbar.html.twig', [
-            'form' => $form->createView(),
+            'maxPages'=>$maxPages,
+            'pathName' => "product"
         ]);
     }
     
@@ -115,7 +85,7 @@ class ProductController extends AbstractController
 
         return $this->render('product/showCategorieProducts.html.twig', [
             'products' => $products,
-            'category' => $category
+            'category' => $category,
         ]);
     }
 }
