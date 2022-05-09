@@ -10,7 +10,7 @@ use Doctrine\Migrations\AbstractMigration;
 /**
  * Auto-generated Migration: Please modify to your needs!
  */
-final class Version20220509014150 extends AbstractMigration
+final class Version20220509211208 extends AbstractMigration
 {
     public function getDescription(): string
     {
@@ -20,6 +20,15 @@ final class Version20220509014150 extends AbstractMigration
     public function up(Schema $schema): void
     {
         // this up() migration is auto-generated, please modify it to your needs
+        $this->addSql('CREATE SEQUENCE cart_id_seq INCREMENT BY 1 MINVALUE 1 START 1');
+        $this->addSql('CREATE SEQUENCE cart_element_id_seq INCREMENT BY 1 MINVALUE 1 START 1');
+        $this->addSql('CREATE SEQUENCE category_id_seq INCREMENT BY 1 MINVALUE 1 START 1');
+        $this->addSql('CREATE SEQUENCE comment_id_seq INCREMENT BY 1 MINVALUE 1 START 1');
+        $this->addSql('CREATE SEQUENCE product_id_seq INCREMENT BY 1 MINVALUE 1 START 1');
+        $this->addSql('CREATE SEQUENCE purchase_id_seq INCREMENT BY 1 MINVALUE 1 START 1');
+        $this->addSql('CREATE SEQUENCE reset_password_request_id_seq INCREMENT BY 1 MINVALUE 1 START 1');
+        $this->addSql('CREATE SEQUENCE status_id_seq INCREMENT BY 1 MINVALUE 1 START 1');
+        $this->addSql('CREATE SEQUENCE "user_id_seq" INCREMENT BY 1 MINVALUE 1 START 1');
         $this->addSql('CREATE TABLE cart (id INT NOT NULL, user_id INT NOT NULL, created_at TIMESTAMP(0) WITHOUT TIME ZONE NOT NULL, total_price NUMERIC(10, 2) NOT NULL, quantity_total INT NOT NULL, PRIMARY KEY(id))');
         $this->addSql('CREATE INDEX IDX_BA388B7A76ED395 ON cart (user_id)');
         $this->addSql('CREATE TABLE cart_element (id INT NOT NULL, product_id INT NOT NULL, cart_id INT NOT NULL, quantity INT NOT NULL, PRIMARY KEY(id))');
@@ -32,7 +41,7 @@ final class Version20220509014150 extends AbstractMigration
         $this->addSql('CREATE TABLE comment (id INT NOT NULL, author_id INT DEFAULT NULL, product_id INT DEFAULT NULL, title VARCHAR(255) DEFAULT NULL, rate INT NOT NULL, content TEXT DEFAULT NULL, created_at TIMESTAMP(0) WITHOUT TIME ZONE NOT NULL, PRIMARY KEY(id))');
         $this->addSql('CREATE INDEX IDX_9474526CF675F31B ON comment (author_id)');
         $this->addSql('CREATE INDEX IDX_9474526C4584665A ON comment (product_id)');
-        $this->addSql('CREATE TABLE product (id INT NOT NULL, name VARCHAR(255) NOT NULL, description TEXT NOT NULL, stock INT CHECK (stock > 0), price NUMERIC(10, 2) NOT NULL, image_name VARCHAR(255) NOT NULL, updated_at TIMESTAMP(0) WITHOUT TIME ZONE NOT NULL, PRIMARY KEY(id))');
+        $this->addSql('CREATE TABLE product (id INT NOT NULL, name VARCHAR(255) NOT NULL, description TEXT NOT NULL, stock INT CHECK (stock >= 0), price NUMERIC(10, 2) NOT NULL, image_name VARCHAR(255) NOT NULL, updated_at TIMESTAMP(0) WITHOUT TIME ZONE NOT NULL, PRIMARY KEY(id))');
         $this->addSql('CREATE TABLE purchase (id INT NOT NULL, cart_id INT NOT NULL, status_id INT NOT NULL, purchase_date TIMESTAMP(0) WITHOUT TIME ZONE NOT NULL, PRIMARY KEY(id))');
         $this->addSql('CREATE UNIQUE INDEX UNIQ_6117D13B1AD5CDBF ON purchase (cart_id)');
         $this->addSql('CREATE INDEX IDX_6117D13B6BF700BD ON purchase (status_id)');
@@ -69,6 +78,15 @@ final class Version20220509014150 extends AbstractMigration
         $this->addSql('ALTER TABLE cart DROP CONSTRAINT FK_BA388B7A76ED395');
         $this->addSql('ALTER TABLE comment DROP CONSTRAINT FK_9474526CF675F31B');
         $this->addSql('ALTER TABLE reset_password_request DROP CONSTRAINT FK_7CE748AA76ED395');
+        $this->addSql('DROP SEQUENCE cart_id_seq CASCADE');
+        $this->addSql('DROP SEQUENCE cart_element_id_seq CASCADE');
+        $this->addSql('DROP SEQUENCE category_id_seq CASCADE');
+        $this->addSql('DROP SEQUENCE comment_id_seq CASCADE');
+        $this->addSql('DROP SEQUENCE product_id_seq CASCADE');
+        $this->addSql('DROP SEQUENCE purchase_id_seq CASCADE');
+        $this->addSql('DROP SEQUENCE reset_password_request_id_seq CASCADE');
+        $this->addSql('DROP SEQUENCE status_id_seq CASCADE');
+        $this->addSql('DROP SEQUENCE "user_id_seq" CASCADE');
         $this->addSql('DROP TABLE cart');
         $this->addSql('DROP TABLE cart_element');
         $this->addSql('DROP TABLE category');
