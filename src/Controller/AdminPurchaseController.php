@@ -32,7 +32,7 @@ class AdminPurchaseController extends AbstractController
             $manager->persist($purchase);
             $manager->flush();
 
-            $this->addFlash('success', 'La commande a bien été modifié');
+            $this->addFlash('success', 'La commande a bien été modifiée');
 
             return $this->redirectToRoute('admin_purchase');
         }

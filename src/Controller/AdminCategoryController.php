@@ -16,7 +16,7 @@ class AdminCategoryController extends AbstractController
     #[Route('/admin/categories', name: 'admin_category')]
     public function index(CategoryRepository $categoryRepository): Response
     {
-        $categories = $categoryRepository->findAll();
+        $categories = $categoryRepository->findBy([],array('name'=>'ASC'));
         return $this->render('admin_category/index.html.twig', [
             "categories" => $categories
         ]);

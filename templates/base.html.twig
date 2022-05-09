@@ -27,7 +27,7 @@
   {{ include('_navbar.html.twig') }}
     <div class="">
       {% for message in app.flashes('success') %}
-        <div style="margin-bottom:0;text-align:center;" class="alert alert-success">
+        <div style="margin-bottom:0;text-align:center; z-index:999;" class="alert alert-success">
           {{message}}
         </div>
       {% endfor %}
