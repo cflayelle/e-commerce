@@ -29,7 +29,7 @@
             <td class=" text-end ">{{ purchase.cart.totalPrice }}€</td>
             <td class=" text-end ">{{ purchase.purchaseDate | date('d/m/Y')}}</td>
             <td class=" text-center ">
-                <a href="#" class="btn btn-sm btn-outline-primary">Modifier le statut</a>
+                <a href="{{path("admin_purchase_edit",{id:purchase.id})}}" class="btn btn-sm btn-outline-primary">Modifier le statut</a>
             </td>
           </tr>
         {% endfor %}

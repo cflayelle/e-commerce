@@ -59,7 +59,7 @@ class PurchaseController extends AbstractController
             $purchase->setPurchaseDate(new DateTime());
             $purchase->setCart($cart);
 
-            $status = $statusRepository->find(1);
+            $status = $statusRepository->findOneBy([]);
             if (!$status) {
                 $status = new Status();
                 $status->setName("en cours");

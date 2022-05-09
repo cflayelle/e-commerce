@@ -1,12 +1,27 @@
-{% extends 'base.html.twig' %}
+{% extends 'admin.base.html.twig' %}
 
 {% block title %}Hello AdminStatusController!{% endblock %}
+
+{% form_theme form 'bootstrap_4_layout.html.twig' %}
+
 
 {% block body %}
 
 
 <div class="">
-    <h1>Statuts</h1>
+    <div class="pt-5">
+        <h1>Ajouter un statut</h1>
+        {{ form_start(form)}}
+        <div class="d-flex flex-column">
+            {{ form_row( form.name) }}
+            <button class="btn btn-outline-primary my-3 align-self-end">
+            {{ button_label|default('Ajouter') }}
+            </button>
+        </div>
+            
+        {{ form_end(form)}}
+    </div>
+    <h1>Tous les status</h1>
     {% for status in statuses %}
         <p>{{ status }}</p>
     {% endfor %}

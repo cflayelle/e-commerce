@@ -14,16 +14,10 @@ use Symfony\Component\Routing\Annotation\Route;
 class AdminStatusController extends AbstractController
 {
     #[Route('/admin/status', name: 'app_admin_status')]
-    public function index(StatusRepository $statusRepository): Response
+    public function index(StatusRepository $statusRepository,ObjectManager $manager, Request $request): Response
     {
         $statuses = $statusRepository->findAll();
 
-        return $this->render('admin_status/index.html.twig', compact("statuses"));
-    } 
-    
-    #[Route('/admin/status/new', name: 'app_admin_status_new')]
-    public function new(ObjectManager $manager, StatusRepository $statusRepository, Request $request): Response
-    {
         $status = new Status();
         $form = $this ->createForm(StatusType::class, $status);
         $form->handleRequest($request);
@@ -33,11 +27,11 @@ class AdminStatusController extends AbstractController
 
             $this->addFlash('success', 'Le statut a bien été ajouté');
             return $this->redirectToRoute('app_admin_status');
-            
         }
 
-        return $this->render('admin_status/new.html.twig', [
-                'form' => $form->createView()
-            ]);
-    }
+        return $this->render('admin_status/index.html.twig', [
+            "statuses" => $statuses,
+            'form' => $form->createView()
+        ]);
+    } 
 }
